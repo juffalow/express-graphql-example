@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var quotes = sequelize.define('quotes', {
+    var quote = sequelize.define('quote', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -22,5 +22,5 @@ module.exports = function(sequelize, DataTypes) {
         freezeTableName: true
     });
 
-    return quotes;
+    return quote;
 }

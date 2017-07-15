@@ -1,9 +1,9 @@
 var models = require('./models/index.js');
 
 function startApp() {
-    models.quotes.findAll().then(function(quotes) {
-        for( var i = 0; i < quotes.length; i++ ) {
-            console.log(quotes[i].id + " | " + quotes[i].quote);
+    models.quote.findAll().then(function(quote) {
+        for( var i = 0; i < quote.length; i++ ) {
+            console.log(quote[i].id + " | " + quote[i].quote);
         }
     });
 }
