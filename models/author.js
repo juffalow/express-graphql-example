@@ -1,12 +1,19 @@
 module.exports = function(sequelize, DataTypes) {
-    var quote = sequelize.define('quote', {
+    var author = sequelize.define('author', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             field: 'id'
         },
-        quote: {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
+        },
+        last_name: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -18,9 +25,9 @@ module.exports = function(sequelize, DataTypes) {
         freezeTableName: true
     });
 
-    quote.associate = function(models) {
-        models.quote.belongsTo(models.author, { foreignKey: "author_id", targetKey: "id" });
+    author.associate = function(models) {
+        models.author.hasMany(models.quote, { foreignKey: "author_id", sourceKey: "id" });
     }
 
-    return quote;
+    return author;
 }
