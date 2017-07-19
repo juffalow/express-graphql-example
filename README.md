@@ -47,4 +47,4 @@ Run the project :
 npm start
 ```
 
-Open GraphiQL in your browser (http://localhost:8088/graphql)[http://localhost:8088/graphql]
+Open GraphiQL in your browser [http://localhost:8088/graphql](http://localhost:8088/graphql)
