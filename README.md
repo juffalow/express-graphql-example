@@ -1,4 +1,4 @@
-# Sequelize example
+# Express, GraphQL and Sequelize example
 
 
 ## How to run the project
@@ -46,3 +46,5 @@ Run the project :
 ```
 npm start
 ```
+
+Open GraphiQL in your browser (http://localhost:8088/graphql)[http://localhost:8088/graphql]
