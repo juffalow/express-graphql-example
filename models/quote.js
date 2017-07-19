@@ -6,6 +6,9 @@ module.exports = function(sequelize, DataTypes) {
             primaryKey: true,
             field: 'id'
         },
+        author_id: {
+            type: DataTypes.INTEGER
+        },
         quote: {
             type: DataTypes.STRING,
             allowNull: false,
