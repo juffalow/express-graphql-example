@@ -21,7 +21,7 @@ export default new GraphQLObjectType({
             },
             author: {
                 type: Author,
-                description: "author",
+                description: "author of this quote",
                 resolve (quote) {
                     return models.author.findById(quote.author_id);
                 }

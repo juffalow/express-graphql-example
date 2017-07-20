@@ -1,4 +1,5 @@
 import {
+  GraphQLList,
   GraphQLID,
   GraphQLString,
   GraphQLNonNull
@@ -8,13 +9,11 @@ import models from '../../../models/index.js';
 import Author from '../../types/author.js';
 
 export default {
-    type: Author,
+    type: new GraphQLList(Author),
     args: {
-        id: {
-            type: new GraphQLNonNull(GraphQLID)
-        }
+
     },
     resolve(root, args) {
-        return models.author.findById(args.id);
+        return models.author.findAll({where: args});
     }
 };

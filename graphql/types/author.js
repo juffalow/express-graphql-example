@@ -10,7 +10,7 @@ import models from '../../models/index.js';
 
 export default new GraphQLObjectType({
     name: 'author',
-    description: 'author',
+    description: 'author of some quote',
     fields () {
         return {
             id: {
@@ -22,21 +22,21 @@ export default new GraphQLObjectType({
             },
             name: {
                 type: GraphQLString,
-                description: "author name",
+                description: "author's name",
                 resolve (author) {
                     return author.name;
                 }
             },
             last_name: {
                 type: GraphQLString,
-                description: "author last name",
+                description: "author's last name",
                 resolve (author) {
                     return author.last_name;
                 }
             },
             quotes: {
                 type: new GraphQLList(Quote),
-                description: "author quotes",
+                description: "author's quotes",
                 resolve(author) {
                     return models.quote.findAll({ where: { author_id: author.id } });
                 }
