@@ -1,5 +1,6 @@
 # Express, GraphQL and Sequelize example
 
+![out](https://user-images.githubusercontent.com/8142965/28421804-7dc7aa9e-6d66-11e7-9e1d-0c6c5b804464.gif)
 
 ## How to run the project
 
