@@ -12,9 +12,11 @@ export default {
     type: Author,
     name: 'addAuthor',
     args: {
-      author: { type: author }
+      id: { type: GraphQLID },
+      name: { type: GraphQLString },
+      last_name: { type: GraphQLString }
     },
     resolve(root, args) {
-        return models.author.add(args.id);
+        return models.author.create({id: args.id,name: args.name,last_name: args.last_name});
     }
 };
