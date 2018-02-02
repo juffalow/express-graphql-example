@@ -1,22 +1,22 @@
 {
   "development": {
     "username": "root",
-    "password": "",
-    "database": "graphql_revelation",
+    "password": "RJFtco2007",
+    "database": "graphql_example",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "",
-    "database": "graphql_revelation",
+    "password": "RJFtco2007",
+    "database": "graphql_example",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "",
-    "database": "graphql_revelation",
+    "password": "RJFtco2007",
+    "database": "graphql_example",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
