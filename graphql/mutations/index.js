@@ -1,4 +1,4 @@
-import quote from './quote/quote.js';
+// import quote from './quote/quote.js';
 // import quotes from './quote/quotes.js';
 
 import author from './author/author.js';
@@ -6,8 +6,8 @@ import author from './author/author.js';
 
 
 export default {
-    quote,
-    quotes,
+    // quote,
+    // quotes,
     author,
-    authors
+    // authors
 };
