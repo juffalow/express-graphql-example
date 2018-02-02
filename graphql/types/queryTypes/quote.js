@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 
 import Author from './author.js';
-import models from '../../models/index.js';
+import models from '../../../models/index.js';
 
 export default new GraphQLObjectType({
     name: 'quote',

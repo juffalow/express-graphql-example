@@ -1,20 +1,19 @@
 import {
+  GraphQLList,
   GraphQLID,
   GraphQLString,
   GraphQLNonNull
 } from 'graphql';
 
 import models from '../../../models/index.js';
-import Author from '../../types/queryTypes/author.js';
+import Experience from '../../types/queryTypes/04-experience.js';
 
 export default {
-    type: Author,
+    type: new GraphQLList(Experience),
     args: {
-        id: {
-            type: new GraphQLNonNull(GraphQLID)
-        }
+
     },
     resolve(root, args) {
-        return models.author.findById(args.id);
+        return models.experience.findAll({where: args});
     }
 };

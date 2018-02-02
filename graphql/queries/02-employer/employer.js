@@ -5,16 +5,16 @@ import {
 } from 'graphql';
 
 import models from '../../../models/index.js';
-import Author from '../../types/queryTypes/author.js';
+import Employer from '../../types/queryTypes/02-employer.js';
 
 export default {
-    type: Author,
+    type: Employer,
     args: {
         id: {
             type: new GraphQLNonNull(GraphQLID)
         }
     },
     resolve(root, args) {
-        return models.author.findById(args.id);
+        return models.employer.findById(args.id);
     }
 };

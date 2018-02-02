@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 
 import models from '../../../models/index.js';
-import Quote from '../../types/quote.js';
+import Quote from '../../types/queryTypes/quote.js';
 
 export default {
     type: Quote,
