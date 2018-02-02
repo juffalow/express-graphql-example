@@ -7,7 +7,7 @@ import {
 
 
 export default new GraphQLInputObjectType({
-  name: 'addAuthor',
+  name: 'authorInputType',
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLInt) },
     name: { type: new GraphQLNonNull(GraphQLString) },

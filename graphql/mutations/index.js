@@ -8,6 +8,6 @@ import author from './author/author.js';
 export default {
     // quote,
     // quotes,
-    author,
+    author
     // authors
 };
