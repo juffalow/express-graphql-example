@@ -16,13 +16,14 @@ export default {
       quote: { type: GraphQLString }
     },
     resolve(root, args) {
-        return models.quote.create({author_id: 2, quote: args.quote});
+        return models.quote.create({author_id: args.id, quote: args.quote});
     }
 };
 
 const quote = new GraphQLInputObjectType({
   name: 'addQuoteInputType',
   fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLID) },
     quote: { type: new GraphQLNonNull(GraphQLString) },
   })
 })

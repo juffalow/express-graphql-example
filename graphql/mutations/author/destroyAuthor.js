@@ -1,4 +1,5 @@
 import {
+  GraphQLID,
   GraphQLString,
   GraphQLNonNull,
   GraphQLInputObjectType
@@ -7,22 +8,21 @@ import {
 import models from '../../../models/index.js';
 import Author from '../../types/author.js';
 
+//working
 export default {
     type: Author,
-    name: 'addAuthor',
+    name: 'destroyAuthor',
     args: {
-      name: { type: GraphQLString },
-      last_name: { type: GraphQLString }
+      id: { type: GraphQLID },
     },
     resolve(root, args) {
-        return models.author.create({name: args.name,last_name: args.last_name});
+        return models.author.destroy({where: {id: args.id}});
     }
 };
 
 const author = new GraphQLInputObjectType({
-  name: 'addAuthorInputType',
+  name: 'destroyAuthorInputType',
   fields: () => ({
-    name: { type: new GraphQLNonNull(GraphQLString) },
-    last_name: { type: new GraphQLNonNull(GraphQLString) }
+    id: { type: new GraphQLNonNull(GraphQLID) },
   })
 })
