@@ -6,7 +6,7 @@ import {
 } from 'graphql';
 
 import models from '../../../models/index.js';
-import Photo from '../../types/queryTypes/03-photo.js';
+import Photo from '../../types/03-photo.js';
 
 export default {
     type: new GraphQLList(Photo),

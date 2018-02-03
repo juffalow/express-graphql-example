@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 
 import models from '../../../models/index.js';
-import Leadership from '../../types/queryTypes/05-leadership.js';
+import Leadership from '../../types/05-leadership.js';
 
 export default {
     type: Leadership,

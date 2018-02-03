@@ -6,7 +6,7 @@ import {
 } from 'graphql';
 
 import Quote from './quote.js';
-import models from '../../../models/index.js';
+import models from '../../models/index.js';
 
 export default new GraphQLObjectType({
     name: 'author',
@@ -40,7 +40,7 @@ export default new GraphQLObjectType({
                 resolve(author) {
                     return models.quote.findAll({ where: { author_id: author.id } });
                 }
-            }
+            },
         };
     }
 });

@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 
 import models from '../../../models/index.js';
-import Author from '../../types/queryTypes/author.js';
+import Author from '../../types/author.js';
 
 export default {
     type: Author,

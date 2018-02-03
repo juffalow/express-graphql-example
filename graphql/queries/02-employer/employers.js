@@ -6,7 +6,7 @@ import {
 } from 'graphql';
 
 import models from '../../../models/index.js';
-import Employer from '../../types/queryTypes/02-employer.js';
+import Employer from '../../types/02-employer.js';
 
 export default {
     type: new GraphQLList(Employer),

@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 
 import models from '../../../models/index.js';
-import Candidate from '../../types/queryTypes/01-candidate.js';
+import Candidate from '../../types/01-candidate.js';
 
 export default {
     type: Candidate,

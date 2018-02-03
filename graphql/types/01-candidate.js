@@ -6,7 +6,7 @@ import {
 } from 'graphql';
 
 import Experience from './04-experience.js'
-import models from '../../../models/index.js';
+import models from '../../models/index.js';
 
 export default new GraphQLObjectType({
     name: 'candidate',
