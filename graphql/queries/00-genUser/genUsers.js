@@ -6,7 +6,7 @@ import {
 } from 'graphql';
 
 import models from '../../../models/index.js';
-import GenUser from '../../types/queryTypes/00-genUser.js';
+import GenUser from '../../types/00-genUser.js';
 
 export default {
     type: new GraphQLList(GenUser),

@@ -6,7 +6,7 @@ import {
 } from 'graphql';
 
 import models from '../../../models/index.js';
-import Experience from '../../types/queryTypes/04-experience.js';
+import Experience from '../../types/04-experience.js';
 
 export default {
     type: new GraphQLList(Experience),

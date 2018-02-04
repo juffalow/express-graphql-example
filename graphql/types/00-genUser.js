@@ -8,7 +8,7 @@ import {
 
 import Photo from './03-photo.js';
 // import Blocked from './blocked.js';
-import models from '../../../models/index.js';
+import models from '../../models/index.js';
 
 export default new GraphQLObjectType({
     name: 'genUser',

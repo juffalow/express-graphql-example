@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 
 // import Position from './06-position.js';
-import models from '../../../models/index.js';
+import models from '../../models/index.js';
 
 export default new GraphQLObjectType({
     name: 'experience',

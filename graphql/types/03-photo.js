@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 
 import GenUser from './00-genUser.js';
-import models from '../../../models/index.js';
+import models from '../../models/index.js';
 
 export default new GraphQLObjectType({
     name: 'photo',

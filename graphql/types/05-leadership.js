@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 
 import Employer from './02-employer.js';
-import models from '../../../models/index.js';
+import models from '../../models/index.js';
 
 export default new GraphQLObjectType({
     name: 'leadership',

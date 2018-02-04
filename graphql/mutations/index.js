@@ -1,13 +1,17 @@
-// import quote from './quote/quote.js';
-// import quotes from './quote/quotes.js';
+import createAuthor from './author/createAuthor.js';
+import updateAuthor from './author/updateAuthor.js';
+import destroyAuthor from './author/destroyAuthor.js';
 
-import addAuthor from './author/author.js';
-// import authors from './author/authors.js';
+import addQuoteToAuthor from './quote/addQuoteToAuthor.js';
+import destroyQuote from './quote/destroyQuote.js';
+import updateQuote from './quote/updateQuote.js';
 
 
 export default {
-    // quote,
-    // quotes,
-    addAuthor
-    // authors
+    createAuthor,
+    updateAuthor,
+    destroyAuthor,
+    addQuoteToAuthor,
+    destroyQuote,
+    updateQuote
 };
