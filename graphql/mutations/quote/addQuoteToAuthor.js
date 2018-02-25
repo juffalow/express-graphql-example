@@ -12,18 +12,10 @@ export default {
     type: Quote,
     name: 'addQuote',
     args: {
-      id: { type: GraphQLID },
+      author_id: { type: GraphQLID },
       quote: { type: GraphQLString }
     },
-    resolve(root, args) {
-        return models.quote.create({author_id: args.id, quote: args.quote});
+    resolve(root, {author_id, quote}) {
+        return models.quote.create({author_id: author_id, quote: quote});
     }
 };
-
-const quote = new GraphQLInputObjectType({
-  name: 'addQuoteInputType',
-  fields: () => ({
-    id: { type: new GraphQLNonNull(GraphQLID) },
-    quote: { type: new GraphQLNonNull(GraphQLString) },
-  })
-})
