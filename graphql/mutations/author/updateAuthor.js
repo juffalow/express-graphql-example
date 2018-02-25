@@ -14,20 +14,18 @@ export default {
     name: 'updateAuthor',
     args: {
       id: { type: GraphQLID },
-      name: { type: GraphQLString },
-      last_name: { type: GraphQLString }
+      input: {type: authorInput }
     },
-    resolve(root, args) {
-      return models.author.update({name: args.name, last_name: args.last_name}, {where: {id: args.id}});
+    resolve(root, {id, input}) {
+      return models.author.update({name: input.name, last_name: input.last_name}, {where: {id: id}});
 
     }
 };
 
-const author = new GraphQLInputObjectType({
+const authorInput = new GraphQLInputObjectType({
   name: 'updateAuthorInputType',
   fields: () => ({
-    id: { type: new GraphQLNonNull(GraphQLID) },
-    name: { type: new GraphQLNonNull(GraphQLString) },
-    last_name: { type: new GraphQLNonNull(GraphQLString) }
+    name: { type: GraphQLString },
+    last_name: { type: GraphQLString }
   })
 })
