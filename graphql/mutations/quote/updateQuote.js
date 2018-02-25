@@ -20,11 +20,3 @@ export default {
 
     }
 };
-
-const quote = new GraphQLInputObjectType({
-  name: 'updateQuoteInputType',
-  fields: () => ({
-    id: { type: new GraphQLNonNull(GraphQLID) },
-    quote: { type: new GraphQLNonNull(GraphQLString) },
-  })
-})
