@@ -19,11 +19,3 @@ export default {
         return models.author.create({name: args.name,last_name: args.last_name});
     }
 };
-
-const author = new GraphQLInputObjectType({
-  name: 'createAuthorInputType',
-  fields: () => ({
-    name: { type: new GraphQLNonNull(GraphQLString) },
-    last_name: { type: new GraphQLNonNull(GraphQLString) }
-  })
-})
