@@ -17,10 +17,3 @@ export default {
         return models.quote.destroy({where: {id: args.id}});
     }
 };
-
-const quote = new GraphQLInputObjectType({
-  name: 'destroyQuoteInputType',
-  fields: () => ({
-    id: { type: new GraphQLNonNull(GraphQLID) },
-  })
-})
