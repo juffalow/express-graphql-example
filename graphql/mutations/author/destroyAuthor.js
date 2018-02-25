@@ -19,10 +19,3 @@ export default {
         return models.author.destroy({where: {id: args.id}});
     }
 };
-
-const author = new GraphQLInputObjectType({
-  name: 'destroyAuthorInputType',
-  fields: () => ({
-    id: { type: new GraphQLNonNull(GraphQLID) },
-  })
-})
