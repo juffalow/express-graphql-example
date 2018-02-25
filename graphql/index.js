@@ -9,11 +9,10 @@ import mutations from './mutations';
 export default new GraphQLSchema({
     query: new GraphQLObjectType({
         name: 'Query',
-        fields: queries,
-        mutation: mutations
+        fields: queries
     }),
     mutation: new GraphQLObjectType({
-      name: 'Mutation',
-      fields: mutations
-    }),
+        name: 'Mutation',
+        fields: mutations
+    })
 });
