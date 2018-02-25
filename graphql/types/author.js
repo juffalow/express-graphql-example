@@ -40,7 +40,7 @@ export default new GraphQLObjectType({
                 resolve(author) {
                     return models.quote.findAll({ where: { author_id: author.id } });
                 }
-            }
+            },
         };
     }
 });
