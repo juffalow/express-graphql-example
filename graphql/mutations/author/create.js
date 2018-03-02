@@ -14,6 +14,13 @@ export default {
             name: args.author.name,
             last_name: args.author.last_name
         }).save().then(function(newAuthor) {
+            args.author.quotes.forEach((quote) => {
+              models.quote.create({
+                author_id: newAuthor.id,
+                quote: quote.quote,
+              });
+            });
+
             return models.author.findById(newAuthor.id);
         });
     }

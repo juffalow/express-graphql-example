@@ -95,3 +95,24 @@ mutation{
   }
 }
 ```
+
+Add new author with some of his quotes:
+
+```graphql
+mutation{
+  createAuthor(author:{
+    name:"Kent",
+    last_name:"Beck",
+    quotes:[
+      {
+        quote: "I'm not a great programmer; I'm just a good programmer with great habits."
+      },
+      {
+        quote: "Do The Simplest Thing That Could Possibly Work"
+      }
+    ]
+  }) {
+    id
+  }
+}
+```
