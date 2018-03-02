@@ -4,7 +4,6 @@ import {
 } from 'graphql';
 import models from '../../../models/index.js';
 import Quote from '../../types/quote.js';
-import AuthorInput from '../../inputs/author.js';
 
 export default {
   type: Quote,
