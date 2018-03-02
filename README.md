@@ -127,3 +127,14 @@ mutation{
   }
 }
 ```
+
+Update ( change ) specific quote :
+
+```graphql
+mutation{
+	updateQuote(id: 1, quote: "New version of this quote!"){
+    id,
+    quote
+  }
+}
+```
