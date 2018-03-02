@@ -116,3 +116,14 @@ mutation{
   }
 }
 ```
+
+Delete specific quote ( quote with id 1 ) and return its id and quote text:
+
+```graphql
+mutation{
+	deleteQuote(id: 1){
+    id
+    quote
+  }
+}
+```
