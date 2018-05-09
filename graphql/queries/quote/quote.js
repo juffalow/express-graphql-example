@@ -10,11 +10,11 @@ import Quote from '../../types/quote.js';
 export default {
     type: Quote,
     args: {
-        author_id: {
+        id: {
             type: new GraphQLNonNull(GraphQLID)
         }
     },
     resolve(root, args) {
-        return model.quote.findById(args.id);
+        return models.quote.findById(args.id);
     }
 };
