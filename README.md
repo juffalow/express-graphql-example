@@ -63,6 +63,30 @@ query{
 }
 ```
 
+*This will return only first 10 authors!*
+
+If you want to get another 10 authors:
+
+```graphql
+query{
+	authors(offset: 10){
+    id
+    name
+  }
+}
+```
+
+Or more than 10 authors:
+
+```graphql
+query{
+	authors(first: 20){
+    id
+    name
+  }
+}
+```
+
 Get name of author with ID = 4:
 
 ```GraphQL
@@ -78,6 +102,30 @@ Get list of quotes:
 ```graphql
 query{
 	quotes{
+    quote
+  }
+}
+```
+
+*This will return only first 10 quotes!*
+
+If you want to get another 10 quotes:
+
+```graphql
+query{
+	quotes(offset: 10){
+    id
+    quote
+  }
+}
+```
+
+Or more than 10 quotes:
+
+```graphql
+query{
+	quotes(first: 20){
+    id
     quote
   }
 }
