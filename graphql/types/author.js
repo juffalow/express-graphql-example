@@ -38,6 +38,9 @@ export default new GraphQLObjectType({
                 type: new GraphQLList(Quote),
                 description: "author's quotes",
                 resolve(author) {
+                    if (author.hasOwnProperty('quotes')) {
+                      return author.quotes;
+                    }
                     return models.quote.findAll({ where: { author_id: author.id } });
                 }
             }

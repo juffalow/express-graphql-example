@@ -23,6 +23,6 @@ export default {
     const limit = args.first || 10;
     delete args.offset;
     delete args.first;
-    return models.author.findAll({where: args, offset, limit});
+    return models.author.findAll({where: args, include: [ { model: models.quote } ], offset, limit});
   }
 };

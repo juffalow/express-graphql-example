@@ -23,6 +23,9 @@ export default new GraphQLObjectType({
                 type: Author,
                 description: "author of this quote",
                 resolve (quote) {
+                    if (quote.hasOwnProperty('author')) {
+                      return quote.author;
+                    }
                     return models.author.findById(quote.author_id);
                 }
             },
