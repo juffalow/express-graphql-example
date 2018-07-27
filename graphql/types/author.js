@@ -5,8 +5,10 @@ import {
     GraphQLList
 } from 'graphql';
 
+import _ from 'lodash';
 import Quote from './quote.js';
 import models from '../../models/index.js';
+import quotesByIds from '../loaders/batchQuotes.js';
 
 export default new GraphQLObjectType({
     name: 'author',
@@ -38,10 +40,8 @@ export default new GraphQLObjectType({
                 type: new GraphQLList(Quote),
                 description: "author's quotes",
                 resolve(author) {
-                    if (author.hasOwnProperty('quotes')) {
-                      return author.quotes;
-                    }
-                    return models.quote.findAll({ where: { author_id: author.id } });
+					//return models.quote.findAll({ where: { author_id: author.id } });
+					return quotesByIds.load(author.id);
                 }
             }
         };

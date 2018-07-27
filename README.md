@@ -63,30 +63,6 @@ query{
 }
 ```
 
-*This will return only first 10 authors!*
-
-If you want to get another 10 authors:
-
-```graphql
-query{
-	authors(offset: 10){
-    id
-    name
-  }
-}
-```
-
-Or more than 10 authors:
-
-```graphql
-query{
-	authors(first: 20){
-    id
-    name
-  }
-}
-```
-
 Get name of author with ID = 4:
 
 ```GraphQL
@@ -107,30 +83,6 @@ query{
 }
 ```
 
-*This will return only first 10 quotes!*
-
-If you want to get another 10 quotes:
-
-```graphql
-query{
-	quotes(offset: 10){
-    id
-    quote
-  }
-}
-```
-
-Or more than 10 quotes:
-
-```graphql
-query{
-	quotes(first: 20){
-    id
-    quote
-  }
-}
-```
-
 Add new author and get his ID:
 
 ```graphql
@@ -140,49 +92,6 @@ mutation{
     last_name:"Beck"
   }) {
     id
-  }
-}
-```
-
-Add new author with some of his quotes:
-
-```graphql
-mutation{
-  createAuthor(author:{
-    name:"Kent",
-    last_name:"Beck",
-    quotes:[
-      {
-        quote: "I'm not a great programmer; I'm just a good programmer with great habits."
-      },
-      {
-        quote: "Do The Simplest Thing That Could Possibly Work"
-      }
-    ]
-  }) {
-    id
-  }
-}
-```
-
-Delete specific quote ( quote with id 1 ) and return its id and quote text:
-
-```graphql
-mutation{
-	deleteQuote(id: 1){
-    id
-    quote
-  }
-}
-```
-
-Update ( change ) specific quote :
-
-```graphql
-mutation{
-	updateQuote(id: 1, quote: "New version of this quote!"){
-    id,
-    quote
   }
 }
 ```
