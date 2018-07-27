@@ -1,7 +1,10 @@
 import {
   GraphQLInputObjectType,
-  GraphQLString
+  GraphQLString,
+  GraphQLList,
 } from 'graphql';
+
+import QuoteInput from './quote.js';
 
 export default new GraphQLInputObjectType({
   name: 'authorinput',
@@ -9,5 +12,6 @@ export default new GraphQLInputObjectType({
       name: { type: GraphQLString },
       last_name: { type: GraphQLString },
       name: { type: GraphQLString },
+      quotes: { type: new GraphQLList(QuoteInput) }
   })
 });
