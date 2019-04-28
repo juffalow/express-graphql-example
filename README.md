@@ -1,7 +1,8 @@
-# Express, GraphQL and Sequelize example
+# Express, GraphQL example
 
-![out](https://user-images.githubusercontent.com/8142965/28421804-7dc7aa9e-6d66-11e7-9e1d-0c6c5b804464.gif)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?maxAge=2592000)](https://github.com/juffalow/express-graphql-sequelize-example/blob/master/LICENSE)
+
+![out](https://user-images.githubusercontent.com/8142965/56870885-6e11dd00-6a16-11e9-8bba-230476808af2.png)
 
 ## How to run the project
 
@@ -41,7 +42,7 @@ Open GraphiQL in your browser [http://localhost:8088/graphql](http://localhost:8
 
 ## Examples
 
-Get list of authors:
+Get list of authors (*it will return only first 10 authors!*):
 
 ```graphql
 query {
@@ -57,8 +58,6 @@ query {
   }
 }
 ```
-
-*This will return only first 10 authors!*
 
 Filter authors based of first name, also return total number of such authors:
 
