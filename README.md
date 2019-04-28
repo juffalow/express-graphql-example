@@ -1,6 +1,7 @@
 # Express, GraphQL and Sequelize example
 
 ![out](https://user-images.githubusercontent.com/8142965/28421804-7dc7aa9e-6d66-11e7-9e1d-0c6c5b804464.gif)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?maxAge=2592000)](https://github.com/juffalow/express-graphql-sequelize-example/blob/master/LICENSE)
 
 ## How to run the project
 
@@ -14,32 +15,20 @@ yarn
 npm install
 ```
 
-Edit `config/config.json` :
+Update `src/database.js` file with your credentials:
 
-```json
-{
-    "development": {
-        "username": "root",
-        "password": null,
-        "database": "sequelize-example",
-        "host": "127.0.0.1",
-        "dialect": "mysql"
-    },
-    "test": {
-        ...
-    },
-    "production": {
-        ...
-    }
-}
-```
+```js
+import Knex from 'knex';
 
-Init and seed database :
-
-```shell
-sequelize db:migrate
-
-sequelize db:seed:all
+export default new Knex({
+  client: 'mysql2',
+  connection: {
+    host : '127.0.0.1',
+    user : 'root',
+    password : '',
+    database : 'sequelize_example'
+  }
+});
 ```
 
 Run the project :
@@ -55,34 +44,36 @@ Open GraphiQL in your browser [http://localhost:8088/graphql](http://localhost:8
 Get list of authors:
 
 ```graphql
-query{
-  authors{
-    name
-    last_name
+query {
+  authors {
+    edges {
+      node {
+        id
+        _id
+        firstName
+        lastName
+      }
+    }
   }
 }
 ```
 
 *This will return only first 10 authors!*
 
-If you want to get another 10 authors:
+Filter authors based of first name, also return total number of such authors:
 
 ```graphql
-query{
-	authors(offset: 10){
-    id
-    name
-  }
-}
-```
-
-Or more than 10 authors:
-
-```graphql
-query{
-	authors(first: 20){
-    id
-    name
+query {
+  authors(firstName: "Robert") {
+    totalCount
+    edges {
+      node {
+        id
+        _id
+        firstName
+        lastName
+      }
+    }
   }
 }
 ```
@@ -90,99 +81,38 @@ query{
 Get name of author with ID = 4:
 
 ```GraphQL
-query{
-	author(id:4){
-    name
+query {
+  author(id: 4) {
+    id
+    _id
+    firstName
+    lastName
   }
 }
 ```
 
 Get list of quotes:
 
-```graphql
-query{
-	quotes{
-    quote
-  }
-}
-```
-
-*This will return only first 10 quotes!*
-
-If you want to get another 10 quotes:
-
-```graphql
-query{
-	quotes(offset: 10){
-    id
-    quote
-  }
-}
-```
-
-Or more than 10 quotes:
-
-```graphql
-query{
-	quotes(first: 20){
-    id
-    quote
-  }
-}
-```
-
-Add new author and get his ID:
-
-```graphql
-mutation{
-  createAuthor(author:{
-    name:"Kent",
-    last_name:"Beck"
-  }) {
-    id
-  }
-}
-```
-
-Add new author with some of his quotes:
-
-```graphql
-mutation{
-  createAuthor(author:{
-    name:"Kent",
-    last_name:"Beck",
-    quotes:[
-      {
-        quote: "I'm not a great programmer; I'm just a good programmer with great habits."
-      },
-      {
-        quote: "Do The Simplest Thing That Could Possibly Work"
+```GraphQL
+query {
+  quotes {
+    edges {
+      node {
+        id
+        _id
+        quote
       }
-    ]
-  }) {
-    id
+    }
   }
 }
 ```
 
-Delete specific quote ( quote with id 1 ) and return its id and quote text:
+## Old version
 
-```graphql
-mutation{
-	deleteQuote(id: 1){
-    id
-    quote
-  }
-}
-```
+Here is a link to an old version, that used `sequelize` and did not use connections:
 
-Update ( change ) specific quote :
+* [1.4.0](https://github.com/juffalow/express-graphql-sequelize-example/tree/1.4.0)
 
-```graphql
-mutation{
-	updateQuote(id: 1, quote: "New version of this quote!"){
-    id,
-    quote
-  }
-}
-```
+## License
+
+[MIT license](./LICENSE)
