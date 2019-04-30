@@ -6,6 +6,6 @@ export default new Knex({
     host : '127.0.0.1',
     user : 'root',
     password : '',
-    database : 'sequelize_example'
+    database : 'express-graphql-example'
   }
 });
