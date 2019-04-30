@@ -108,6 +108,39 @@ query {
 }
 ```
 
+Create new author:
+
+```GraphQL
+mutation {
+  createAuthor(input:{
+    firstName:"Kent"
+    lastName:"Beck"
+  }) {
+    id
+    _id
+    firstName
+    lastName
+  }
+}
+```
+
+Update existing author:
+
+```GraphQL
+mutation {
+  updateAuthor(input:{
+    id: 1
+    firstName: "JOHN"
+    lastName: "JOHNSON"
+  }) {
+    id
+    _id
+    firstName
+    lastName
+  }
+}
+```
+
 ## Old version
 
 Here is a link to an old version, that used `sequelize` and did not use connections:

@@ -2,6 +2,11 @@ import Author from '../models/Author';
 import database from '../database';
 
 export default class AuthorRepository {
+  /**
+   * 
+   * @param {number} id 
+   * @returns {Promise}
+   */
   async get(id) {
     return database.select()
       .from('author')
@@ -10,6 +15,14 @@ export default class AuthorRepository {
       .then(author => new Author(author.id, author.firstName, author.lastName));
   }
 
+  /**
+   * 
+   * @param {number} first 
+   * @param {number} after 
+   * @param {string} firstName 
+   * @param {string} lastName 
+   * @returns {Promise}
+   */
   async find(first, after, firstName, lastName) {
     return database.select()
       .from('author')
@@ -30,6 +43,12 @@ export default class AuthorRepository {
       .then(authors => authors.map(author => new Author(author.id, author.firstName, author.lastName)));
   }
 
+  /**
+   * 
+   * @param {string} firstName 
+   * @param {string} lastName 
+   * @returns {Promise}
+   */
   async count(firstName, lastName) {
     return database.count({ count: '*' })
       .from('author')
@@ -46,6 +65,12 @@ export default class AuthorRepository {
       .then(result => result.count);
   }
 
+  /**
+   * 
+   * @param {string} firstName 
+   * @param {string} lastName 
+   * @returns {Promise}
+   */
   async create(firstName, lastName) {
     return database.insert({
       firstName: firstName,
@@ -53,8 +78,37 @@ export default class AuthorRepository {
     })
     .returning('id')
     .into('author')
-    .then(id => {
-      return new Author(id, firstName, lastName);
+    .then(ids => {
+      return new Author(ids[0], firstName, lastName);
     });
+  }
+
+  /**
+   * 
+   * @param {number} id 
+   * @param {string} firstName 
+   * @param {string} lastName 
+   * @returns {Promise}
+   */
+  async update(id, firstName, lastName) {
+    return database.table('author')
+      .where('id', id)
+      .modify((queryBuilder) => {
+        if (typeof firstName !== 'undefined' && firstName !== null) {
+          queryBuilder.update('firstName', firstName);
+        }
+
+        if (typeof lastName !== 'undefined' && lastName !== null) {
+          queryBuilder.update('lastName', lastName);
+        }
+      })
+      .then(updatedRows => {
+        if (updatedRows.length === 0) {
+          throw new Error('Author not found!');
+        }
+        return updatedRows;
+      }).then(() => {
+        return this.get(id);
+      });
   }
 }

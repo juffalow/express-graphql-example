@@ -2,6 +2,11 @@ import Quote from '../models/Quote';
 import database from '../database';
 
 export default class QuoteRepository {
+  /**
+   * 
+   * @param {number} id 
+   * @returns {Promise}
+   */
   async get(id) {
     return database.select()
       .from('quote')
@@ -10,6 +15,14 @@ export default class QuoteRepository {
       .then(quote => new Quote(quote.id, quote.authorId, quote.quote));
   }
 
+  /**
+   * 
+   * @param {number} first 
+   * @param {number} after 
+   * @param {number} authorId 
+   * @param {string} query 
+   * @returns {Promise}
+   */
   async find(first, after, authorId, query) {
     return database.select()
       .from('quote')
@@ -30,6 +43,11 @@ export default class QuoteRepository {
       .then(quotes => quotes.map(quote => new Quote(quote.id, quote.authorId, quote.quote)));
   }
 
+  /**
+   * 
+   * @param {number} authorId 
+   * @param {string} query 
+   */
   async count(authorId, query) {
     return database.count({ count: '*' })
       .from('quote')

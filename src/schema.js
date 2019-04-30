@@ -10,7 +10,9 @@ export default buildSchema(`
   }
 
   type Mutation {
-    createAuthor(input: NewAuthor): Author
+    createAuthor(input: NewAuthorInput): Author
+
+    updateAuthor(input: UpdateAuthorInput): Author
   }
 
   interface Node {
@@ -92,8 +94,14 @@ export default buildSchema(`
     pageInfo: PageInfo
   }
 
-  input NewAuthor {
+  input NewAuthorInput {
     firstName: String!
     lastName: String!
+  }
+
+  input UpdateAuthorInput {
+    id: ID!
+    firstName: String
+    lastName: String
   }
 `);

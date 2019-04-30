@@ -12,6 +12,9 @@ export default {
     return context.resolver.quotes(args);
   },
   createAuthor: function(args, context) {
-    return context.repository.author.create(args.firstName, args.lastName);
+    return context.repository.author.create(args.input.firstName, args.input.lastName);
+  },
+  updateAuthor: function(args, context) {
+    return context.repository.author.update(args.input.id, args.input.firstName, args.input.lastName);
   }
 };
