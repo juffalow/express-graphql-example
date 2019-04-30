@@ -1,5 +1,3 @@
-import quotes from '../resolvers/quotes';
-
 export default class Author {
   constructor(id, firstName, lastName) {
     this.id = Buffer.from(`author-${id}`).toString('base64');
@@ -7,9 +5,9 @@ export default class Author {
     this.firstName = firstName;
     this.lastName = lastName;
   }
-
-  quotes(args) {
-    return quotes({
+  
+  quotes(args, context) {
+    return context.resolver.quotes({
       authorId: this._id,
       ...args
     });

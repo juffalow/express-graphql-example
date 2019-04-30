@@ -1,18 +1,17 @@
-import AuthorRepository from '../repositories/AuthorRepository';
-import QuoteRepository from '../repositories/QuoteRepository';
-
-import authors from '../resolvers/authors';
-import quotes from '../resolvers/quotes';
-
 export default {
-  author: function(args) {
-    const authorRepository = new AuthorRepository();
-    return authorRepository.get(args.id);
+  author: function(args, context) {
+    return context.repository.author.get(args.id);
   },
-  authors,
-  quote: function(args) {
-    const quoteRepository = new QuoteRepository();
-    return quoteRepository.get(args.id);
+  authors: function(args, context) {
+    return context.resolver.authors(args);
   },
-  quotes,
-}
+  quote: function(args, context) {
+    return context.repository.quote.get(args.id);
+  },
+  quotes: function(args, context) {
+    return context.resolver.quotes(args);
+  },
+  createAuthor: function(args, context) {
+    return context.repository.author.create(args.firstName, args.lastName);
+  }
+};
