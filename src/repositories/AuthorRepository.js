@@ -7,7 +7,7 @@ export default class AuthorRepository {
       .from('author')
       .where('id', id)
       .first()
-      .then(author => new Author(author.id, author.name, author.last_name));
+      .then(author => new Author(author.id, author.firstName, author.lastName));
   }
 
   async find(first, after, firstName, lastName) {
@@ -27,7 +27,7 @@ export default class AuthorRepository {
         }
       })
       .limit(first)
-      .then(authors => authors.map(author => new Author(author.id, author.name, author.last_name)));
+      .then(authors => authors.map(author => new Author(author.id, author.firstName, author.lastName)));
   }
 
   async count(firstName, lastName) {
@@ -35,14 +35,26 @@ export default class AuthorRepository {
       .from('author')
       .modify((queryBuilder) => {
         if (typeof firstName !== 'undefined' && firstName !== null) {
-          queryBuilder.where('name', 'like', `%${firstName}%`);
+          queryBuilder.where('firstName', 'like', `%${firstName}%`);
         }
 
         if (typeof lastName !== 'undefined' && lastName !== null) {
-          queryBuilder.where('last_name', 'like', `%${lastName}%`);
+          queryBuilder.where('lastName', 'like', `%${lastName}%`);
         }
       })
       .first()
       .then(result => result.count);
+  }
+
+  async create(firstName, lastName) {
+    return database.insert({
+      firstName: firstName,
+      lastName: lastName,
+    })
+    .returning('id')
+    .into('author')
+    .then(id => {
+      return new Author(id, firstName, lastName);
+    });
   }
 }

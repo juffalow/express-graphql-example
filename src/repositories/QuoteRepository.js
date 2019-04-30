@@ -7,7 +7,7 @@ export default class QuoteRepository {
       .from('quote')
       .where('id', id)
       .first()
-      .then(quote => new Quote(quote.id, quote.author_id, quote.quote));
+      .then(quote => new Quote(quote.id, quote.authorId, quote.quote));
   }
 
   async find(first, after, authorId, query) {
@@ -19,7 +19,7 @@ export default class QuoteRepository {
         }
 
         if (typeof authorId !== 'undefined' && authorId !== null) {
-          queryBuilder.where('author_id', authorId);
+          queryBuilder.where('authorId', authorId);
         }
 
         if (typeof query !== 'undefined' && query !== null) {
@@ -27,7 +27,7 @@ export default class QuoteRepository {
         }
       })
       .limit(first)
-      .then(quotes => quotes.map(quote => new Quote(quote.id, quote.author_id, quote.quote)));
+      .then(quotes => quotes.map(quote => new Quote(quote.id, quote.authorId, quote.quote)));
   }
 
   async count(authorId, query) {
@@ -35,7 +35,7 @@ export default class QuoteRepository {
       .from('quote')
       .modify((queryBuilder) => {
         if (typeof authorId !== 'undefined' && authorId !== null) {
-          queryBuilder.where('author_id', authorId);
+          queryBuilder.where('authorId', authorId);
         }
 
         if (typeof query !== 'undefined' && query !== null) {

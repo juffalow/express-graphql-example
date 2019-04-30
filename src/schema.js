@@ -9,6 +9,10 @@ export default buildSchema(`
     quotes(first: Int = 10, after: ID, authorId: ID, query: String): QuoteConnection
   }
 
+  type Mutation {
+    createAuthor(input: NewAuthor): Author
+  }
+
   interface Node {
     id: ID!
   }
@@ -86,5 +90,10 @@ export default buildSchema(`
     edges: [QuoteEdge]
     
     pageInfo: PageInfo
+  }
+
+  input NewAuthor {
+    firstName: String!
+    lastName: String!
   }
 `);
