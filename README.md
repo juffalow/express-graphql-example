@@ -79,6 +79,32 @@ query {
 }
 ```
 
+Order authors by first name and last name:
+
+```graphql
+query {
+  authors(orderBy:[
+    {
+      field:FIRST_NAME
+      direction:ASC
+    }
+    {
+      field:LAST_NAME
+      direction:ASC
+    }
+  ]) {
+    edges {
+      cursor
+      node {
+        _id
+        firstName
+        lastName
+      }
+    }
+  }
+}
+```
+
 Get name of author with ID = 4:
 
 ```GraphQL

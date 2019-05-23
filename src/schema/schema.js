@@ -3,10 +3,10 @@ import { buildSchema } from 'graphql';
 export default buildSchema(`
   type Query {
     author(id: ID!): Author
-    authors(first: Int = 10, after: ID, firstName: String, lastName: String): AuthorConnection
+    authors(first: Int = 10, after: String = "Y3Vyc29yMA==", firstName: String, lastName: String, orderBy: [AuthorOrder]): AuthorConnection
 
     quote(id: ID!): Quote
-    quotes(first: Int = 10, after: ID, authorId: ID, query: String): QuoteConnection
+    quotes(first: Int = 10, after: String = "Y3Vyc29yMA==", authorId: ID, query: String): QuoteConnection
   }
 
   type Mutation {
@@ -103,5 +103,29 @@ export default buildSchema(`
     id: ID!
     firstName: String
     lastName: String
+  }
+
+  input AuthorOrder {
+    field: AuthorOrderField!
+    direction: OrderDirection = "ASC"
+  }
+
+  enum OrderDirection {
+    """Specifies an ascending order for a given orderBy argument."""
+    ASC
+
+    """Specifies a descending order for a given orderBy argument."""
+    DESC
+  }
+
+  enum AuthorOrderField {
+    """Order authors by ID."""
+    ID
+
+    """Order authors by first name."""
+    FIRST_NAME
+
+    """Order authors by last name."""
+    LAST_NAME
   }
 `);

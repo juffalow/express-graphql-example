@@ -28,7 +28,7 @@ export default class QuoteRepository {
       .from('quote')
       .modify((queryBuilder) => {
         if (typeof after !== 'undefined' && after !== null) {
-          queryBuilder.where('id', '>', after);
+          queryBuilder.offset(after);
         }
 
         if (typeof authorId !== 'undefined' && authorId !== null) {

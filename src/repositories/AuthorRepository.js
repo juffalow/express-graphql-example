@@ -23,12 +23,12 @@ export default class AuthorRepository {
    * @param {string} lastName 
    * @returns {Promise}
    */
-  async find(first, after, firstName, lastName) {
+  async find(first, after, firstName, lastName, orderBy) {
     return database.select()
       .from('author')
       .modify((queryBuilder) => {
         if (typeof after !== 'undefined' && after !== null) {
-          queryBuilder.where('id', '>', after);
+          queryBuilder.offset(after);
         }
 
         if (typeof firstName !== 'undefined' && firstName !== null) {
@@ -37,6 +37,10 @@ export default class AuthorRepository {
 
         if (typeof lastName !== 'undefined' && lastName !== null) {
           queryBuilder.where('last_name', 'like', `%${lastName}%`);
+        }
+
+        if (Array.isArray(orderBy)) {
+          orderBy.forEach(ob => queryBuilder.orderBy(ob.field, ob.direction));
         }
       })
       .limit(first)
