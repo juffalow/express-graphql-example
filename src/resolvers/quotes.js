@@ -1,4 +1,5 @@
 import QuoteRepository from '../repositories/QuoteRepository';
+import nodesToEdges from './nodesToEdges';
 import toConnection from './toConnection';
 
 export default async (args) => {
