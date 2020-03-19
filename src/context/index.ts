@@ -1,15 +1,12 @@
-import authors from '../resolvers/authors';
-import quotes from '../resolvers/quotes';
+import IContext from './IContext';
 import AuthorRepository from '../repositories/AuthorRepository';
 import QuoteRepository from '../repositories/QuoteRepository';
 
-export default {
-  resolver: {
-    authors,
-    quotes,
-  },
-  repository: {
+const context: IContext = {
+  repositories: {
     author: new AuthorRepository(),
     quote: new QuoteRepository(),
   },
 };
+
+export default context;

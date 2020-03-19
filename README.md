@@ -16,31 +16,42 @@ yarn
 npm install
 ```
 
-Update `src/database.js` file with your credentials:
+Create `src/config.ts` or rename `src/config.example.js` and update file with your credentials:
 
 ```js
-import Knex from 'knex';
-
-export default new Knex({
-  client: 'mysql2',
-  connection: {
-    host : '127.0.0.1',
-    user : 'root',
-    password : '',
-    database : 'express-graphql-example'
-  }
-});
+export default {
+  port: 3013,
+  database: {
+    type: 'mysql',
+    connection: {
+      database : '',
+      host : '',
+      password : '',
+      user : '',
+    },
+    /*
+     * Migrations run on every start of the application.
+     * If you initialized the database manually (from the database.sql file),
+     * you don't need this.
+     */
+    migrations: {
+      directory: __dirname + '/migrations',
+    },
+  },
+};
 ```
-
-Init the database. You can find the SQL script int [database.sql](./database.sql).
 
 Run the project :
 
 ```shell
+yarn start
+
+# on
+
 npm start
 ```
 
-Open GraphiQL in your browser [http://localhost:8088/graphql](http://localhost:8088/graphql)
+Open GraphiQL in your browser [http://localhost:3010/graphql](http://localhost:3010/graphql)
 
 ## Examples
 
@@ -170,8 +181,10 @@ mutation {
 ## Old version
 
 Here is a link to an old version, that used `sequelize` and did not use connections:
-
 * [1.4.0](https://github.com/juffalow/express-graphql-sequelize-example/tree/1.4.0)
+
+Here is a link to older version, that did not use typescript, and used `buildSchema` method and graphql schema file:
+* [2.0.0](https://github.com/juffalow/express-graphql-example/tree/2.0.0)
 
 ## License
 
