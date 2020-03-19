@@ -1,29 +1,18 @@
-import Author from '../models/Author';
+import IAuthorRepository, { IFindParameters, ICountParameters } from './IAuthorRepository';
 import database from '../database';
 
-export default class AuthorRepository {
-  /**
-   * 
-   * @param {number} id 
-   * @returns {Promise}
-   */
-  async get(id) {
+export default class AuthorRepository implements IAuthorRepository {
+
+  async get(id: number): Promise<any> {
     return database.select()
       .from('author')
       .where('id', id)
-      .first()
-      .then(author => new Author(author.id, author.firstName, author.lastName));
+      .first();
   }
 
-  /**
-   * 
-   * @param {number} first 
-   * @param {number} after 
-   * @param {string} firstName 
-   * @param {string} lastName 
-   * @returns {Promise}
-   */
-  async find(first, after, firstName, lastName, orderBy) {
+  async find(params: IFindParameters): Promise<any> {
+    const { first, after, firstName, lastName, orderBy } = params;
+
     return database.select()
       .from('author')
       .modify((queryBuilder) => {
@@ -43,17 +32,12 @@ export default class AuthorRepository {
           orderBy.forEach(ob => queryBuilder.orderBy(ob.field, ob.direction));
         }
       })
-      .limit(first)
-      .then(authors => authors.map(author => new Author(author.id, author.firstName, author.lastName)));
+      .limit(first);
   }
 
-  /**
-   * 
-   * @param {string} firstName 
-   * @param {string} lastName 
-   * @returns {Promise}
-   */
-  async count(firstName, lastName) {
+  async count(params: ICountParameters): Promise<any> {
+    const { firstName, lastName } = params;
+
     return database.count({ count: '*' })
       .from('author')
       .modify((queryBuilder) => {
@@ -69,32 +53,19 @@ export default class AuthorRepository {
       .then(result => result.count);
   }
 
-  /**
-   * 
-   * @param {string} firstName 
-   * @param {string} lastName 
-   * @returns {Promise}
-   */
-  async create(firstName, lastName) {
+  async create(firstName: string, lastName: string): Promise<any> {
     return database.insert({
-      firstName: firstName,
-      lastName: lastName,
+      firstName,
+      lastName,
     })
     .returning('id')
     .into('author')
     .then(ids => {
-      return new Author(ids[0], firstName, lastName);
+      return this.get(ids[0]);
     });
   }
 
-  /**
-   * 
-   * @param {number} id 
-   * @param {string} firstName 
-   * @param {string} lastName 
-   * @returns {Promise}
-   */
-  async update(id, firstName, lastName) {
+  async update(id: number, firstName: string, lastName: string): Promise<any> {
     return database.table('author')
       .where('id', id)
       .modify((queryBuilder) => {

@@ -8,7 +8,7 @@ CREATE TABLE author (
 CREATE TABLE quote (
   id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   authorId INT(11) UNSIGNED NOT NULL,
-  quote TEXT NOT NULL,
+  `text` TEXT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (authorId) REFERENCES author(id)
 ) ENGINE=InnoDB;
@@ -24,7 +24,7 @@ INSERT INTO author(firstName, lastName) VALUES
 ('Niels', 'Bohr'),
 ('Jamie', 'Zawinski');
 
-INSERT INTO quote(authorId, quote) VALUES
+INSERT INTO quote(authorId, `text`) VALUES
 (1, 'First, solve the problem. Then, write the code.'),
 (2, 'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.'),
 (3, 'If you stop learning, then the projects you work on are stuck in whatever time period you decided to settle.'),

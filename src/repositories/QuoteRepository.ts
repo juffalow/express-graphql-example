@@ -1,29 +1,18 @@
-import Quote from '../models/Quote';
+import IQuoteRepository, { IFindParameters, ICountParameters } from './IQuoteRepository';
 import database from '../database';
 
-export default class QuoteRepository {
-  /**
-   * 
-   * @param {number} id 
-   * @returns {Promise}
-   */
-  async get(id) {
+export default class QuoteRepository implements IQuoteRepository {
+
+  async get(id: number): Promise<any> {
     return database.select()
       .from('quote')
       .where('id', id)
-      .first()
-      .then(quote => new Quote(quote.id, quote.authorId, quote.quote));
+      .first();
   }
 
-  /**
-   * 
-   * @param {number} first 
-   * @param {number} after 
-   * @param {number} authorId 
-   * @param {string} query 
-   * @returns {Promise}
-   */
-  async find(first, after, authorId, query) {
+  async find(params: IFindParameters): Promise<any> {
+    const { first, after, authorId, query } = params;
+
     return database.select()
       .from('quote')
       .modify((queryBuilder) => {
@@ -39,16 +28,12 @@ export default class QuoteRepository {
           queryBuilder.where('quote', 'like', `%${query}%`);
         }
       })
-      .limit(first)
-      .then(quotes => quotes.map(quote => new Quote(quote.id, quote.authorId, quote.quote)));
+      .limit(first);
   }
 
-  /**
-   * 
-   * @param {number} authorId 
-   * @param {string} query 
-   */
-  async count(authorId, query) {
+  async count(params: ICountParameters): Promise<any> {
+    const { authorId, query } = params;
+
     return database.count({ count: '*' })
       .from('quote')
       .modify((queryBuilder) => {
