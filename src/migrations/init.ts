@@ -1,3 +1,12 @@
+/**
+ * Migration to initialize database - create two tables with relationships between them.
+ *
+ * Command:
+ * ./node_modules/.bin/knex migrate:make init -x ts --connection localhost --client mysql2 --migrations-directory ./src/migrations/
+ *
+ * @see https://knexjs.org/#Migrations-CLI
+ * @param knex
+ */
 export function up(knex) {
   return knex.schema.createTable('author', (author) => {
     author.increments('id').primary();
