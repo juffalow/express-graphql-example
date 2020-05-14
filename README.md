@@ -20,7 +20,7 @@ Create `src/config.ts` or rename `src/config.example.js` and update file with yo
 
 ```js
 export default {
-  port: 3013,
+  port: 3010,
   database: {
     type: 'mysql',
     connection: {
