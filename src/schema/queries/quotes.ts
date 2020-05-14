@@ -1,5 +1,3 @@
-// tslint:disable:object-literal-sort-keys
-
 import { GraphQLInt, GraphQLString } from 'graphql';
 import Context from '../../context/Context';
 import quoteConnection from '../types/connections/quoteConnection';

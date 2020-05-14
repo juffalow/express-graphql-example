@@ -1,3 +1,5 @@
+import { Quote } from '../types';
+
 export interface FindParameters {
   first: number;
   after?: number;
@@ -11,9 +13,9 @@ export interface CountParameters {
 }
 
 export default interface AuthorRepository {
-  get(id: number): Promise<any>;
+  get(id: number): Promise<Quote>;
 
-  find(params: FindParameters): Promise<any>;
+  find(params: FindParameters): Promise<Quote[]>;
 
-  count(params: CountParameters): Promise<any>;
+  count(params: CountParameters): Promise<number>;
 }

@@ -1,5 +1,3 @@
-// tslint:disable:object-literal-sort-keys
-
 import {
   GraphQLID,
   GraphQLNonNull,
@@ -9,6 +7,7 @@ import {
 import Context from '../../context/Context';
 import author from './author';
 import { formatDate } from '../../utils/functions';
+import { Quote } from '../../types';
 
 const quote = new GraphQLObjectType({
   name: 'Quote',
@@ -16,35 +15,35 @@ const quote = new GraphQLObjectType({
     id: {
       type: GraphQLNonNull(GraphQLID),
       description: 'Globally unique ID of the quote',
-      resolve: (obj): string => {
+      resolve: (obj: Quote): string => {
         return Buffer.from(`quote-${obj.id}`).toString('base64');
       },
     },
     _id: {
       type: GraphQLNonNull(GraphQLID),
       description: 'Database ID of the quote',
-      resolve: (obj): number => {
+      resolve: (obj: Quote): number => {
         return obj.id;
       },
     },
     text: {
       type: GraphQLNonNull(GraphQLString),
       description: '',
-      resolve: (obj): string => {
+      resolve: (obj: Quote): string => {
         return obj.text;
       },
     },
     author: {
       type: author,
       description: 'Author of the quote',
-      resolve: (obj, args, context: Context): Promise<any> => {
+      resolve: (obj: Quote, args, context: Context): Promise<any> => {
         return context.repositories.author.get(obj.authorId);
       },
     },
     createdAt: {
       type: GraphQLNonNull(GraphQLString),
       description: '',
-      resolve: (obj): string => {
+      resolve: (obj: Quote): string => {
         return formatDate(new Date(obj.createdAt));
       },
     },

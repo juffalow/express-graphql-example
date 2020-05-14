@@ -1,5 +1,3 @@
-// tslint:disable:object-literal-sort-keys
-
 import {
   GraphQLID,
   GraphQLNonNull,
@@ -12,6 +10,7 @@ import { formatDate } from '../../utils/functions';
 import quoteConnection from './connections/quoteConnection';
 import nodesToEdges from '../queries/nodesToEdges';
 import toConnection from '../queries/toConnection';
+import { Author } from '../../types';
 
 const author = new GraphQLObjectType({
   name: 'Author',
@@ -19,28 +18,28 @@ const author = new GraphQLObjectType({
     id: {
       type: GraphQLNonNull(GraphQLID),
       description: 'Globally unique ID of the author',
-      resolve: (obj): string => {
+      resolve: (obj: Author): string => {
         return Buffer.from(`author-${obj.id}`).toString('base64');
       },
     },
     _id: {
       type: GraphQLNonNull(GraphQLID),
       description: 'Database ID of the author',
-      resolve: (obj): number => {
+      resolve: (obj: Author): number => {
         return obj.id;
       },
     },
     firstName: {
       type: GraphQLNonNull(GraphQLString),
       description: 'Author\'s first name',
-      resolve: (obj): string => {
+      resolve: (obj: Author): string => {
         return obj.firstName;
       },
     },
     lastName: {
       type: GraphQLNonNull(GraphQLString),
       description: 'Author\'s last name',
-      resolve: (obj): string => {
+      resolve: (obj: Author): string => {
         return obj.lastName;
       },
     },
@@ -61,7 +60,7 @@ const author = new GraphQLObjectType({
           type: GraphQLString,
         },
       },
-      resolve: async (obj, args, context: Context): Promise<any> => {
+      resolve: async (obj: Author, args, context: Context): Promise<any> => {
         const after = typeof args.after === 'undefined' || args.after === null ? 0 : parseInt(Buffer.from(args.after, 'base64').toString('ascii').replace('cursor', ''), 10);
         const quotes = await context.repositories.quote.find({
           first: args.first,
@@ -80,7 +79,7 @@ const author = new GraphQLObjectType({
     createdAt: {
       type: GraphQLNonNull(GraphQLString),
       description: '',
-      resolve: (obj): string => {
+      resolve: (obj: Author): string => {
         return formatDate(new Date(obj.createdAt));
       },
     },

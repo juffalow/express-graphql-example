@@ -1,16 +1,17 @@
 import AuthorRepository, { FindParameters, CountParameters } from './AuthorRepository';
 import database from '../database';
+import { Author } from '../types';
 
 export default class AuthorKnexRepository implements AuthorRepository {
 
-  async get(id: number): Promise<any> {
+  async get(id: number): Promise<Author> {
     return database.select()
       .from('author')
       .where('id', id)
       .first();
   }
 
-  async find(params: FindParameters): Promise<any> {
+  async find(params: FindParameters): Promise<Author[]> {
     const { first, after, firstName, lastName, orderBy } = params;
 
     return database.select()
@@ -35,7 +36,7 @@ export default class AuthorKnexRepository implements AuthorRepository {
       .limit(first);
   }
 
-  async count(params: CountParameters): Promise<any> {
+  async count(params: CountParameters): Promise<number> {
     const { firstName, lastName } = params;
 
     return database.count({ count: '*' })
@@ -53,7 +54,7 @@ export default class AuthorKnexRepository implements AuthorRepository {
       .then(result => result.count);
   }
 
-  async create(firstName: string, lastName: string): Promise<any> {
+  async create(firstName: string, lastName: string): Promise<Author> {
     return database.insert({
       firstName,
       lastName,
@@ -65,7 +66,7 @@ export default class AuthorKnexRepository implements AuthorRepository {
     });
   }
 
-  async update(id: number, firstName: string, lastName: string): Promise<any> {
+  async update(id: number, firstName: string, lastName: string): Promise<Author> {
     return database.table('author')
       .where('id', id)
       .modify((queryBuilder) => {

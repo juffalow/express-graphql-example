@@ -1,16 +1,17 @@
 import QuoteRepository, { FindParameters, CountParameters } from './QuoteRepository';
 import database from '../database';
+import { Quote } from '../types';
 
 export default class QuoteKnexRepository implements QuoteRepository {
 
-  async get(id: number): Promise<any> {
+  async get(id: number): Promise<Quote> {
     return database.select()
       .from('quote')
       .where('id', id)
       .first();
   }
 
-  async find(params: FindParameters): Promise<any> {
+  async find(params: FindParameters): Promise<Quote[]> {
     const { first, after, authorId, query } = params;
 
     return database.select()
@@ -31,7 +32,7 @@ export default class QuoteKnexRepository implements QuoteRepository {
       .limit(first);
   }
 
-  async count(params: CountParameters): Promise<any> {
+  async count(params: CountParameters): Promise<number> {
     const { authorId, query } = params;
 
     return database.count({ count: '*' })

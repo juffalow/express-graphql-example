@@ -1,9 +1,11 @@
+import { Author, OrderBy } from '../types';
+
 export interface FindParameters {
   first: number;
   after?: number;
   firstName?: string;
   lastName?: string;
-  orderBy?: any[];
+  orderBy?: OrderBy[];
 }
 
 export interface CountParameters {
@@ -12,13 +14,13 @@ export interface CountParameters {
 }
 
 export default interface AuthorRepository {
-  get(id: number): Promise<any>;
+  get(id: number): Promise<Author>;
 
-  create(firstName: string, lastName: string): Promise<any>;
+  create(firstName: string, lastName: string): Promise<Author>;
 
-  update(id: number, firstName: string, lastName: string): Promise<any>;
+  update(id: number, firstName: string, lastName: string): Promise<Author>;
 
-  find(params: FindParameters): Promise<any>;
+  find(params: FindParameters): Promise<Author[]>;
 
-  count(params: CountParameters): Promise<any>;
+  count(params: CountParameters): Promise<number>;
 }

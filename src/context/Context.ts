@@ -1,4 +1,3 @@
-
 import AuthorRepository from '../repositories/AuthorRepository';
 import QuoteRepository from '../repositories/QuoteRepository';
 

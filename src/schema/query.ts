@@ -1,5 +1,3 @@
-// tslint:disable:object-literal-sort-keys
-
 import { GraphQLObjectType } from 'graphql';
 import author from './queries/author';
 import authors from './queries/authors';

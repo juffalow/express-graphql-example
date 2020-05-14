@@ -22,6 +22,5 @@ app.use('/graphql', graphqlHTTP({
 }));
 
 app.listen(config.port, () => {
-  // tslint:disable-next-line:no-console
   console.log(`server started at http://localhost:${ config.port }`);
 });
