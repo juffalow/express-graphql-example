@@ -1,4 +1,4 @@
-export default function cors(req, res, next) {
+export default function cors(req, res, next): void {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -7,4 +7,4 @@ export default function cors(req, res, next) {
   } else {
     next();
   }
-};
+}

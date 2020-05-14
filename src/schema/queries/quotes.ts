@@ -1,13 +1,12 @@
 // tslint:disable:object-literal-sort-keys
 
 import { GraphQLInt, GraphQLString } from 'graphql';
-import IContext from '../../context/IContext';
+import Context from '../../context/Context';
 import quoteConnection from '../types/connections/quoteConnection';
 import nodesToEdges from './nodesToEdges';
 import toConnection from './toConnection';
 
-interface IQuotesQueryArguments {
-  id: any;
+interface QuotesQueryArguments {
   first: number;
   after: string;
   query: string;
@@ -30,7 +29,7 @@ export default {
       type: GraphQLString,
     },
   },
-  resolve: async (_, args: IQuotesQueryArguments, context: IContext) => {
+  resolve: async (_, args: QuotesQueryArguments, context: Context) => {
     const after = typeof args.after === 'undefined' || args.after === null ? 0 : parseInt(Buffer.from(args.after, 'base64').toString('ascii').replace('cursor', ''), 10);
     const quotes = await context.repositories.quote.find({
       first: args.first,

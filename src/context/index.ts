@@ -1,8 +1,8 @@
-import IContext from './IContext';
-import AuthorRepository from '../repositories/AuthorRepository';
-import QuoteRepository from '../repositories/QuoteRepository';
+import Context from './Context';
+import AuthorRepository from '../repositories/AuthorKnexRepository';
+import QuoteRepository from '../repositories/QuoteKnexRepository';
 
-const context: IContext = {
+const context: Context = {
   repositories: {
     author: new AuthorRepository(),
     quote: new QuoteRepository(),

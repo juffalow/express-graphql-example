@@ -12,12 +12,14 @@
     },
     "scripts": {
         "start": "tsc && node dist/index.js",
-        "lint": "tslint 'src/**/*.ts'"
+        "lint": "eslint . --ext .ts"
     },
     "devDependencies": {
         "@types/express": "^4.17.3",
         "@types/node": "^13.9.2",
-        "tslint": "^6.1.0",
+        "@typescript-eslint/eslint-plugin": "^2.33.0",
+        "@typescript-eslint/parser": "^2.33.0",
+        "eslint": "^7.0.0",
         "typescript": "^3.8.3"
     }
 }

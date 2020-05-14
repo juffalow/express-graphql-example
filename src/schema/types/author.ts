@@ -7,7 +7,7 @@ import {
   GraphQLString,
   GraphQLInt,
 } from 'graphql';
-import IContext from '../../context/IContext';
+import Context from '../../context/Context';
 import { formatDate } from '../../utils/functions';
 import quoteConnection from './connections/quoteConnection';
 import nodesToEdges from '../queries/nodesToEdges';
@@ -19,28 +19,28 @@ const author = new GraphQLObjectType({
     id: {
       type: GraphQLNonNull(GraphQLID),
       description: 'Globally unique ID of the author',
-      resolve: (obj) => {
+      resolve: (obj): string => {
         return Buffer.from(`author-${obj.id}`).toString('base64');
       },
     },
     _id: {
       type: GraphQLNonNull(GraphQLID),
       description: 'Database ID of the author',
-      resolve: (obj) => {
+      resolve: (obj): number => {
         return obj.id;
       },
     },
     firstName: {
       type: GraphQLNonNull(GraphQLString),
       description: 'Author\'s first name',
-      resolve: (obj) => {
+      resolve: (obj): string => {
         return obj.firstName;
       },
     },
     lastName: {
       type: GraphQLNonNull(GraphQLString),
       description: 'Author\'s last name',
-      resolve: (obj) => {
+      resolve: (obj): string => {
         return obj.lastName;
       },
     },
@@ -61,7 +61,7 @@ const author = new GraphQLObjectType({
           type: GraphQLString,
         },
       },
-      resolve: async (obj, args, context: IContext) => {
+      resolve: async (obj, args, context: Context): Promise<any> => {
         const after = typeof args.after === 'undefined' || args.after === null ? 0 : parseInt(Buffer.from(args.after, 'base64').toString('ascii').replace('cursor', ''), 10);
         const quotes = await context.repositories.quote.find({
           first: args.first,
@@ -80,7 +80,7 @@ const author = new GraphQLObjectType({
     createdAt: {
       type: GraphQLNonNull(GraphQLString),
       description: '',
-      resolve: (obj) => {
+      resolve: (obj): string => {
         return formatDate(new Date(obj.createdAt));
       },
     },

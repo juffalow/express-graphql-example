@@ -1,4 +1,4 @@
-export default function logResponseTime(req, res, next) {
+export default function logResponseTime(req, res, next): void {
   const startHrTime = process.hrtime();
 
   res.on('finish', () => {
@@ -9,4 +9,4 @@ export default function logResponseTime(req, res, next) {
   });
 
   next();
-};
+}

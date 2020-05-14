@@ -1,14 +1,13 @@
 // tslint:disable:object-literal-sort-keys
 
 import { GraphQLInt, GraphQLString, GraphQLList } from 'graphql';
-import IContext from '../../context/IContext';
+import Context from '../../context/Context';
 import authorConnection from '../types/connections/authorConnection';
 import authorsOrder from '../types/inputs/authorsOrder';
 import nodesToEdges from './nodesToEdges';
 import toConnection from './toConnection';
 
-interface IAuthorsQueryArguments {
-  id: any;
+interface AuthorsQueryArguments {
   first: number;
   after: string;
   firstName: string;
@@ -39,7 +38,7 @@ export default {
       type: GraphQLList(authorsOrder),
     },
   },
-  resolve: async (_, args: IAuthorsQueryArguments, context: IContext) => {
+  resolve: async (_, args: AuthorsQueryArguments, context: Context) => {
     const after = typeof args.after === 'undefined' || args.after === null ? 0 : parseInt(Buffer.from(args.after, 'base64').toString('ascii').replace('cursor', ''), 10);
     const authors = await context.repositories.author.find({
       first: args.first,

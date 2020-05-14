@@ -6,7 +6,7 @@ import {
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql';
-import IContext from '../../context/IContext';
+import Context from '../../context/Context';
 import author from './author';
 import { formatDate } from '../../utils/functions';
 
@@ -16,35 +16,35 @@ const quote = new GraphQLObjectType({
     id: {
       type: GraphQLNonNull(GraphQLID),
       description: 'Globally unique ID of the quote',
-      resolve: (obj) => {
+      resolve: (obj): string => {
         return Buffer.from(`quote-${obj.id}`).toString('base64');
       },
     },
     _id: {
       type: GraphQLNonNull(GraphQLID),
       description: 'Database ID of the quote',
-      resolve: (obj) => {
+      resolve: (obj): number => {
         return obj.id;
       },
     },
     text: {
       type: GraphQLNonNull(GraphQLString),
       description: '',
-      resolve: (obj) => {
+      resolve: (obj): string => {
         return obj.text;
       },
     },
     author: {
       type: author,
       description: 'Author of the quote',
-      resolve: (obj, args, context: IContext) => {
+      resolve: (obj, args, context: Context): Promise<any> => {
         return context.repositories.author.get(obj.authorId);
       },
     },
     createdAt: {
       type: GraphQLNonNull(GraphQLString),
       description: '',
-      resolve: (obj) => {
+      resolve: (obj): string => {
         return formatDate(new Date(obj.createdAt));
       },
     },

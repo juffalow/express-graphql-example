@@ -8,12 +8,12 @@ import quotes from './queries/quotes';
 
 const query = new GraphQLObjectType({
   name: 'Query',
-  fields: {
+  fields: (): any => ({
     author,
     authors,
     quote,
     quotes,
-  },
+  }),
 });
 
 export default query;

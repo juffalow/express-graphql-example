@@ -13,7 +13,7 @@ export function up(knex) {
     quote.timestamp('createdAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     quote.timestamp('updatedAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
   });
-};
+}
 
 export function down(knex) {
   return knex.schema.droptTable('quote').dropTable('author');
