@@ -6,12 +6,12 @@
 
 ## How to run the project
 
-Install dependencies :
+Install dependencies:
 
 ```shell
 yarn
 
-# or
+# or using npm
 
 npm install
 ```
@@ -41,12 +41,12 @@ export default {
 };
 ```
 
-Run the project :
+Run the project:
 
 ```shell
 yarn start
 
-# on
+# or using npm
 
 npm start
 ```
