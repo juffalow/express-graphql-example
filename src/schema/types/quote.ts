@@ -7,7 +7,7 @@ import {
 import Context from '../../context/Context';
 import author from './author';
 import { formatDate } from '../../utils/functions';
-import { Quote } from '../../types';
+import { Quote, Author } from '../../types';
 
 const quote = new GraphQLObjectType({
   name: 'Quote',
@@ -36,8 +36,8 @@ const quote = new GraphQLObjectType({
     author: {
       type: author,
       description: 'Author of the quote',
-      resolve: (obj: Quote, args, context: Context): Promise<any> => {
-        return context.repositories.author.get(obj.authorId);
+      resolve: (obj: Quote, args, context: Context): Promise<Author> => {
+        return context.loaders.author.load(obj.authorId);
       },
     },
     createdAt: {

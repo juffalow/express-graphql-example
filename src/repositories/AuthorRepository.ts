@@ -16,6 +16,8 @@ export interface CountParameters {
 export default interface AuthorRepository {
   get(id: number): Promise<Author>;
 
+  getMany(ids: number[]): Promise<Author[]>;
+
   create(firstName: string, lastName: string): Promise<Author>;
 
   update(id: number, firstName: string, lastName: string): Promise<Author>;

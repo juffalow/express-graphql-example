@@ -11,6 +11,12 @@ export default class AuthorKnexRepository implements AuthorRepository {
       .first();
   }
 
+  getMany(ids: number[]): Promise<Author[]> {
+    return database.select()
+      .from('author')
+      .whereIn('id', ids);
+  }
+
   async find(params: FindParameters): Promise<Author[]> {
     const { first, after, firstName, lastName, orderBy } = params;
 
