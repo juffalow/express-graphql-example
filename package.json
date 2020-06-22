@@ -12,6 +12,7 @@
     },
     "scripts": {
         "start": "tsc && node dist/index.js",
+        "run": "tsc -w & nodemon -q -w dist dist/index.js",
         "lint": "eslint . --ext .ts"
     },
     "devDependencies": {
@@ -20,6 +21,7 @@
         "@typescript-eslint/eslint-plugin": "^2.33.0",
         "@typescript-eslint/parser": "^2.33.0",
         "eslint": "^7.0.0",
+        "nodemon": "^2.0.4",
         "typescript": "^3.8.3"
     }
 }
