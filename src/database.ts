@@ -10,4 +10,8 @@ if ('migrations' in config.database) {
   database.migrate.latest();
 }
 
+if ('seeds' in config.database) {
+  database.seed.run({ directory: config.database.seeds.directory });
+}
+
 export default database;
