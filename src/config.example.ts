@@ -3,10 +3,11 @@ export default {
   database: {
     type: 'mysql',
     connection: {
-      database : 'test',
-      host : '127.0.0.1',
-      password : 'password',
-      user : 'user',
+      database: 'test',
+      host: '127.0.0.1',
+      port: 3306,
+      password: 'password',
+      user: 'user',
     },
     migrations: {
       directory: __dirname + '/migrations',
