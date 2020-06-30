@@ -23,8 +23,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install dependencies
       run: yarn install
-    - name: Rename config
-      run: mv ./src/config.example.ts ./src/config.ts
     - name: Verify MariaDB connection
       env:
         PORT: ${{ job.services.mariadb.ports[3306] }}
@@ -32,5 +30,9 @@ jobs:
         while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
           sleep 1
         done
+    - name: Rename config
+      env:
+        PORT: ${{ job.services.mariadb.ports[3306] }}
+      run: sed "s/3306/$PORT/g" src/config.example.ts > src/config.ts
     - name: Run tests
       run: yarn test
