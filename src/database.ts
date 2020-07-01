@@ -4,10 +4,7 @@ import config from './config';
 const database = knex({
   client: 'mysql2',
   ...config.database,
+  pool: { min: 0, max: 7 }
 });
-
-if ('migrations' in config.database) {
-  database.migrate.latest();
-}
 
 export default database;
