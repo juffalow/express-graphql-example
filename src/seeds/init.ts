@@ -9,4 +9,4 @@ export async function seed(knex: Knex): Promise<any> {
                 { id: 1, firstName: 'John', lastName: 'Johnson' },
             ]);
         });
-};
+}
