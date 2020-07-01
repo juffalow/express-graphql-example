@@ -5,6 +5,7 @@ import cors from './middlewares/cors';
 import config from './config';
 import context from './context';
 import schema from './schema';
+import database from './database';
 
 const app = express();
 
@@ -21,6 +22,21 @@ app.use('/graphql', graphqlHTTP({
   schema,
 }));
 
-app.listen(config.port, () => {
-  console.log(`server started at http://localhost:${ config.port }`);
-});
+async function start(): Promise<void> {
+  try {
+    // check database connection
+    await database.raw('SELECT 1 + 1 AS result');
+
+    if ('migrations' in config.database) {
+      await database.migrate.latest({ directory: config.database.migrations.directory });
+    }
+
+    app.listen(config.port, () => {
+      console.log(`Server started at http://localhost:${ config.port }`);
+    });
+  } catch(error) {
+    process.exit(1);
+  }
+}
+
+start();

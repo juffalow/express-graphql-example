@@ -1,9 +1,13 @@
-require('mysql2/node_modules/iconv-lite').encodingExists('foo');
 import request from 'supertest';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import context from '../context';
 import schema from '../schema';
+import database from '../database';
+
+afterAll(() => {
+  return database.destroy();
+});
 
 test('Author query', async () => {
   const app = express();

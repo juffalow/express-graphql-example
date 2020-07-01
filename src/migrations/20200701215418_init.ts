@@ -1,3 +1,5 @@
+import * as Knex from "knex";
+
 /**
  * Migration to initialize database - create two tables with relationships between them.
  *
@@ -7,7 +9,7 @@
  * @see https://knexjs.org/#Migrations-CLI
  * @param knex
  */
-export function up(knex) {
+export async function up(knex: Knex): Promise<any> {
   return knex.schema.createTable('author', (author) => {
     author.increments('id').primary();
     author.string('firstName', 255).notNullable();
@@ -24,6 +26,8 @@ export function up(knex) {
   });
 }
 
-export function down(knex) {
-  return knex.schema.droptTable('quote').dropTable('author');
+
+export async function down(knex: Knex): Promise<any> {
+  return knex.schema.dropTable('quote').dropTable('author');
 }
+
