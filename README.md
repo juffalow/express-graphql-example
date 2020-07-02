@@ -3,6 +3,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?maxAge=2592000)](https://github.com/juffalow/express-graphql-sequelize-example/blob/master/LICENSE)
 [![](https://github.com/juffalow/express-graphql-example/workflows/Lint/badge.svg)](https://github.com/juffalow/express-graphql-example/actions)
 [![](https://github.com/juffalow/express-graphql-example/workflows/Test/badge.svg)](https://github.com/juffalow/express-graphql-example/actions)
+[![codecov](https://codecov.io/gh/juffalow/express-graphql-example/branch/master/graph/badge.svg)](https://codecov.io/gh/juffalow/express-graphql-example)
 
 ![out](https://user-images.githubusercontent.com/8142965/56870885-6e11dd00-6a16-11e9-8bba-230476808af2.png)
 
