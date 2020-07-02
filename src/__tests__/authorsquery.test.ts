@@ -72,3 +72,51 @@ test('Authors query', async () => {
     }
   });
 });
+
+test('Authors query with filter by first name and last name', async () => {
+  const app = express();
+
+  app.use('/graphql', graphqlHTTP({
+    context,
+    schema,
+  }));
+
+  const query = `
+    query {
+      authors(firstName:"j", lastName:"jo") {
+        edges {
+          node {
+            id
+            _id
+            firstName
+            lastName
+          }
+        }
+      }
+    }
+  `;
+
+  const response = await request(app)
+    .post('/graphql')
+    .type('json')
+    .send(JSON.stringify({ query }));
+
+  expect(response.statusCode).toEqual(200);
+
+  expect(JSON.parse(response.text)).toEqual({
+    data: {
+      authors: {
+        edges: [
+          {
+            node: {
+              id: 'YXV0aG9yLTE=',
+              _id: '1',
+              firstName: 'John',
+              lastName: 'Johnson'
+            }
+          },
+        ]
+      }
+    }
+  });
+});

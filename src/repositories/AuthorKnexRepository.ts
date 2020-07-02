@@ -28,11 +28,11 @@ export default class AuthorKnexRepository implements AuthorRepository {
         }
 
         if (typeof firstName !== 'undefined' && firstName !== null) {
-          queryBuilder.where('name', 'like', `%${firstName}%`);
+          queryBuilder.where('firstName', 'like', `%${firstName}%`);
         }
 
         if (typeof lastName !== 'undefined' && lastName !== null) {
-          queryBuilder.where('last_name', 'like', `%${lastName}%`);
+          queryBuilder.where('lastName', 'like', `%${lastName}%`);
         }
 
         if (Array.isArray(orderBy)) {
