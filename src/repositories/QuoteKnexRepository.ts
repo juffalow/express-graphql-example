@@ -26,7 +26,7 @@ export default class QuoteKnexRepository implements QuoteRepository {
         }
 
         if (typeof query !== 'undefined' && query !== null) {
-          queryBuilder.where('quote', 'like', `%${query}%`);
+          queryBuilder.where('text', 'like', `%${query}%`);
         }
       })
       .limit(first);
@@ -43,7 +43,7 @@ export default class QuoteKnexRepository implements QuoteRepository {
         }
 
         if (typeof query !== 'undefined' && query !== null) {
-          queryBuilder.where('quote', 'like', `%${query}%`);
+          queryBuilder.where('text', 'like', `%${query}%`);
         }
       })
       .first()

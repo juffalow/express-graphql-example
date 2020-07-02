@@ -23,6 +23,7 @@ test('Quote query', async () => {
         id
         _id
         text
+        createdAt
       }
     }
   `;
@@ -40,6 +41,7 @@ test('Quote query', async () => {
         id: 'cXVvdGUtMQ==',
         _id: '1',
         text: 'First, solve the problem. Then, write the code.',
+        createdAt: '2020-07-02 12:43:00'
       }
     }
   });
