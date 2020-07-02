@@ -24,6 +24,7 @@ test('Author query', async () => {
         _id
         firstName
         lastName
+        createdAt
       }
     }
   `;
@@ -41,7 +42,8 @@ test('Author query', async () => {
         id: 'YXV0aG9yLTE=',
         _id: '1',
         firstName: 'John',
-        lastName: 'Johnson'
+        lastName: 'Johnson',
+        createdAt: '2020-07-02 11:06:01',
       }
     }
   });

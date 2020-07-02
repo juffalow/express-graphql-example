@@ -4,15 +4,15 @@ export async function seed(knex: Knex): Promise<any> {
   return knex("author").del()
     .then(() => {
       return knex("author").insert([
-        { id: 1, firstName: 'John', lastName: 'Johnson' },
-        { id: 2, firstName: 'Martin', lastName: 'Fowler' },
-        { id: 3, firstName: 'Jason', lastName: 'Lengstorf' },
-        { id: 4, firstName: 'Linus', lastName: 'Torvalds' },
-        { id: 5, firstName: 'Robert', lastName: 'Martin' },
-        { id: 6, firstName: 'Bill', lastName: 'Gates' },
-        { id: 7, firstName: 'Felipe', lastName: 'Fortes' },
-        { id: 8, firstName: 'Niels', lastName: 'Bohr' },
-        { id: 9, firstName: 'Jamie', lastName: 'Zawinski' },
+        { id: 1, firstName: 'John', lastName: 'Johnson', createdAt: '2020-07-02 11:06:01' },
+        { id: 2, firstName: 'Martin', lastName: 'Fowler', createdAt: '2020-07-02 11:06:02' },
+        { id: 3, firstName: 'Jason', lastName: 'Lengstorf', createdAt: '2020-07-02 11:06:03' },
+        { id: 4, firstName: 'Linus', lastName: 'Torvalds', createdAt: '2020-07-02 11:06:04' },
+        { id: 5, firstName: 'Robert', lastName: 'Martin', createdAt: '2020-07-02 11:06:05' },
+        { id: 6, firstName: 'Bill', lastName: 'Gates', createdAt: '2020-07-02 11:06:06' },
+        { id: 7, firstName: 'Felipe', lastName: 'Fortes', createdAt: '2020-07-02 11:06:07' },
+        { id: 8, firstName: 'Niels', lastName: 'Bohr', createdAt: '2020-07-02 11:06:08' },
+        { id: 9, firstName: 'Jamie', lastName: 'Zawinski', createdAt: '2020-07-02 11:06:09' },
       ]);
     }).then(() => {
       return knex('quote').del().then(() => {
