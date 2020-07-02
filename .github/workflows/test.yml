@@ -40,4 +40,8 @@ jobs:
         yarn run migrate
         yarn run seed
     - name: Run tests
-      run: yarn test
+      env:
+        TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: |
+        yarn test
+        CODECOV_TOKEN="$TOKEN" bash <(curl -s https://codecov.io/bash)
