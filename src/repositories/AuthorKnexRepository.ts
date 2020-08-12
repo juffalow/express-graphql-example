@@ -1,4 +1,4 @@
-import AuthorRepository, { FindParameters, CountParameters } from './AuthorRepository';
+import AuthorRepository, { CreateParameters, FindParameters, CountParameters } from './AuthorRepository';
 import database from '../database';
 import { Author } from '../types';
 
@@ -60,10 +60,10 @@ export default class AuthorKnexRepository implements AuthorRepository {
       .then(result => result.count);
   }
 
-  async create(firstName: string, lastName: string): Promise<Author> {
+  async create(params: CreateParameters): Promise<Author> {
     return database.insert({
-      firstName,
-      lastName,
+      firstName: params.firstName,
+      lastName: params.lastName,
     })
     .returning('id')
     .into('author')
