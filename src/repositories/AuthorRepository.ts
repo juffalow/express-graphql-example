@@ -1,5 +1,10 @@
 import { Author, OrderBy } from '../types';
 
+export interface CreateParameters {
+  firstName: string;
+  lastName: string;
+}
+
 export interface FindParameters {
   first: number;
   after?: number;
@@ -18,7 +23,7 @@ export default interface AuthorRepository {
 
   getMany(ids: number[]): Promise<Author[]>;
 
-  create(firstName: string, lastName: string): Promise<Author>;
+  create(params: CreateParameters): Promise<Author>;
 
   update(id: number, firstName: string, lastName: string): Promise<Author>;
 
