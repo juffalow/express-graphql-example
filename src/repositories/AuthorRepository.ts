@@ -30,4 +30,6 @@ export default interface AuthorRepository {
   find(params: FindParameters): Promise<Author[]>;
 
   count(params: CountParameters): Promise<number>;
+
+  delete(id: number): Promise<Author>;
 }
