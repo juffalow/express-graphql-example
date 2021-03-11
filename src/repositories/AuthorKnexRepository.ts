@@ -95,6 +95,10 @@ export default class AuthorKnexRepository implements AuthorRepository {
   }
 
   async delete(id: number): Promise<Author> {
-    return database.table('author').where('id', id).del();
+    const author = await this.get(id);
+
+    await database.table('author').where('id', id).del();
+
+    return author;
   }
 }
