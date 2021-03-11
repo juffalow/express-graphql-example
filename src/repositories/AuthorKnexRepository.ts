@@ -1,7 +1,6 @@
 import AuthorRepository, { CreateParameters, FindParameters, CountParameters } from './AuthorRepository';
 import database from '../database';
 import { Author } from '../types';
-import context from 'context';
 
 export default class AuthorKnexRepository implements AuthorRepository {
 
