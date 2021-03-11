@@ -1,6 +1,7 @@
 import AuthorRepository, { CreateParameters, FindParameters, CountParameters } from './AuthorRepository';
 import database from '../database';
 import { Author } from '../types';
+import context from 'context';
 
 export default class AuthorKnexRepository implements AuthorRepository {
 
@@ -92,5 +93,9 @@ export default class AuthorKnexRepository implements AuthorRepository {
       }).then(() => {
         return this.get(id);
       });
+  }
+
+  async delete(id: number): Promise<any> { //TODO
+    return database.table('author').where('id', id).del();
   }
 }
