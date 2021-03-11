@@ -31,5 +31,5 @@ export default interface AuthorRepository {
 
   count(params: CountParameters): Promise<number>;
 
-  delete(id: number): Promise<any>; //TODO
+  delete(id: number): Promise<number>;
 }
