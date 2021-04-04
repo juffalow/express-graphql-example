@@ -3,21 +3,20 @@ import database from '../database';
 import { Author } from '../types';
 
 export default class AuthorKnexRepository implements AuthorRepository {
-
-  async get(id: number): Promise<Author> {
+  public async get(id: number): Promise<Author> {
     return database.select()
       .from('author')
       .where('id', id)
       .first();
   }
 
-  getMany(ids: number[]): Promise<Author[]> {
+  public async getMany(ids: number[]): Promise<Author[]> {
     return database.select()
       .from('author')
       .whereIn('id', ids);
   }
 
-  async find(params: FindParameters): Promise<Author[]> {
+  public async find(params: FindParameters): Promise<Author[]> {
     const { first, after, firstName, lastName, orderBy } = params;
 
     return database.select()
@@ -42,7 +41,7 @@ export default class AuthorKnexRepository implements AuthorRepository {
       .limit(first);
   }
 
-  async count(params: CountParameters): Promise<number> {
+  public async count(params: CountParameters): Promise<number> {
     const { firstName, lastName } = params;
 
     return database.count({ count: '*' })
@@ -60,19 +59,18 @@ export default class AuthorKnexRepository implements AuthorRepository {
       .then(result => result.count);
   }
 
-  async create(params: CreateParameters): Promise<Author> {
+  public async create(params: CreateParameters): Promise<Author> {
     return database.insert({
       firstName: params.firstName,
       lastName: params.lastName,
     })
-    .returning('id')
     .into('author')
     .then(ids => {
       return this.get(ids[0]);
     });
   }
 
-  async update(id: number, firstName: string, lastName: string): Promise<Author> {
+  public async update(id: number, firstName: string, lastName: string): Promise<Author> {
     return database.table('author')
       .where('id', id)
       .modify((queryBuilder) => {
@@ -94,7 +92,7 @@ export default class AuthorKnexRepository implements AuthorRepository {
       });
   }
 
-  async delete(id: number): Promise<Author> {
+  public async delete(id: number): Promise<Author> {
     const author = await this.get(id);
 
     await database.table('author').where('id', id).del();
