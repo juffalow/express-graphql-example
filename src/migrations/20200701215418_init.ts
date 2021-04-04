@@ -1,4 +1,4 @@
-import * as Knex from "knex";
+import { Knex } from 'knex';
 
 /**
  * Migration to initialize database - create two tables with relationships between them.
