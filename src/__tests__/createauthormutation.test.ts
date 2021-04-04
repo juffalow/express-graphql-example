@@ -17,6 +17,8 @@ test('createAuthor mutation', async () => {
     schema,
   }));
 
+  const count = await database.count({ count: '*' }).from('author').first().then(result => result.count);
+
   const query = `
     mutation {
       createAuthor(input: {
@@ -37,8 +39,6 @@ test('createAuthor mutation', async () => {
     .send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
-
-  const count = await database.count({ count: '*' }).from('author').first().then(result => result.count);
 
   expect(JSON.parse(response.text)).toEqual({
     data: {
