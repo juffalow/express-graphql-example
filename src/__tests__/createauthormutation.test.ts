@@ -38,16 +38,18 @@ test('createAuthor mutation', async () => {
 
   expect(response.statusCode).toEqual(200);
 
+  const count = await database.count({ count: '*' }).from('author').first().then(result => result.count);
+
   expect(JSON.parse(response.text)).toEqual({
     data: {
       createAuthor: {
-        id: 'YXV0aG9yLTEw',
-        _id: '10',
+        id: Buffer.from(`author-${count + 1}`).toString('base64'),
+        _id: `${count + 1}`,
         firstName: 'Matej',
         lastName: 'Jellus',
       }
     }
   });
 
-  await database('author').where('id', 10).del();
+  await database('author').where('id', count + 1).del();
 });
