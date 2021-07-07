@@ -1,0 +1,114 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  release:
+    types:
+      - published
+
+env:
+  PROJECT_NAME: express-graphql-example
+  ORGANIZATION: juffalow
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: yarn install
+    - name: Run lint
+      run: yarn run lint
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: lint
+    services:
+      mariadb:
+        image: mariadb:latest
+        ports:
+          - 3306
+        env:
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: test
+          MYSQL_ROOT_PASSWORD: password
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: yarn install
+    - name: Verify MariaDB connection
+      env:
+        PORT: ${{ job.services.mariadb.ports[3306] }}
+      run: |
+        while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
+          sleep 1
+        done
+    - name: Rename config
+      env:
+        PORT: ${{ job.services.mariadb.ports[3306] }}
+      run: sed "s/3306/$PORT/g" src/config.example.ts > src/config.ts
+    - name: Build projects, run migrations and seeds
+      run: |
+        yarn run build
+        yarn run migrate
+        yarn run seed
+    - name: Run tests
+      env:
+        TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: |
+        yarn test
+        CODECOV_TOKEN="$TOKEN" bash <(curl -s https://codecov.io/bash)
+  push_version:
+    needs: test
+    name: Push container
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    steps:
+    - uses: actions/checkout@v2
+    - name: Rename config
+      run: mv src/config.example.ts src/config.ts
+    - name: Build
+      run: docker build -t $ORGANIZATION/$PROJECT_NAME .
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    - name: Push image to Digital Ocean Container Registry
+      run: |
+        VERSION=${GITHUB_REF#"refs/tags/"}
+        
+        docker tag $ORGANIZATION/$PROJECT_NAME registry.digitalocean.com/$ORGANIZATION/$PROJECT_NAME:$VERSION
+        
+        doctl auth init
+        doctl registry login
+        
+        docker push registry.digitalocean.com/$ORGANIZATION/$PROJECT_NAME:$VERSION
+  deploy_prod:
+    needs: push_version
+    name: Deploy to prod
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    - name: Obtain kubernetes config
+      env:
+        cluster: ${{ secrets.DIGITALOCEAN_KUBERNETES_PRODUCTION }}
+      run: doctl kubernetes cluster kubeconfig save $cluster
+    - name: Deploy new version
+      run: |
+        VERSION=${GITHUB_REF#"refs/tags/"}
+        
+        kubectl set image deployment/$PROJECT_NAME-deployment $PROJECT_NAME-application=registry.digitalocean.com/$ORGANIZATION/$PROJECT_NAME:$VERSION
