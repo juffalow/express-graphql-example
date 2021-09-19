@@ -1,4 +1,4 @@
-FROM node:14.15.1-alpine AS build
+FROM node:14.17.6-alpine AS build
 
 USER node
 RUN mkdir /home/node/express-graphql-example/ && chown -R node:node /home/node/express-graphql-example
@@ -7,7 +7,7 @@ WORKDIR /home/node/express-graphql-example
 COPY --chown=node:node . .
 RUN yarn install --frozen-lockfile && yarn build
 
-FROM node:14.15.1-alpine
+FROM node:14.17.6-alpine
 
 USER node
 EXPOSE 3010
