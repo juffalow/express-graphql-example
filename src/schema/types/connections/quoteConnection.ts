@@ -12,14 +12,14 @@ const quoteConnection = new GraphQLObjectType({
   fields: {
     totalCount: {
       description: 'Identifies the total count of items in the connection.',
-      type: GraphQLNonNull(GraphQLInt),
+      type: new GraphQLNonNull(GraphQLInt),
     },
     edges: {
       description: 'A list of edges.',
       type: new GraphQLList(quoteEdge),
     },
     pageInfo: {
-      type: GraphQLNonNull(pageInfo),
+      type: new GraphQLNonNull(pageInfo),
     },
   },
 });

@@ -7,7 +7,7 @@ const deleteAuthor = {
   type: authorType,
   args: {
     input: {
-      type: GraphQLNonNull(deleteAuthorInput),
+      type: new GraphQLNonNull(deleteAuthorInput),
     },
   },
   resolve: (_, { input }, context: Context): Promise<any> => {

@@ -6,7 +6,7 @@ const quote = {
   type: quoteType,
   args: {
     id: {
-      type: GraphQLNonNull(GraphQLID),
+      type: new GraphQLNonNull(GraphQLID),
     },
   },
   resolve: (_, { id }, context: Context) => {

@@ -13,21 +13,21 @@ const quote = new GraphQLObjectType({
   name: 'Quote',
   fields: () => ({
     id: {
-      type: GraphQLNonNull(GraphQLID),
+      type: new GraphQLNonNull(GraphQLID),
       description: 'Globally unique ID of the quote',
       resolve: (obj: Quote): string => {
         return Buffer.from(`quote-${obj.id}`).toString('base64');
       },
     },
     _id: {
-      type: GraphQLNonNull(GraphQLID),
+      type: new GraphQLNonNull(GraphQLID),
       description: 'Database ID of the quote',
       resolve: (obj: Quote): number => {
         return obj.id;
       },
     },
     text: {
-      type: GraphQLNonNull(GraphQLString),
+      type: new GraphQLNonNull(GraphQLString),
       description: '',
       resolve: (obj: Quote): string => {
         return obj.text;
@@ -41,7 +41,7 @@ const quote = new GraphQLObjectType({
       },
     },
     createdAt: {
-      type: GraphQLNonNull(GraphQLString),
+      type: new GraphQLNonNull(GraphQLString),
       description: '',
       resolve: (obj: Quote): string => {
         return formatDate(new Date(obj.createdAt));

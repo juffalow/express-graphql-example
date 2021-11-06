@@ -16,28 +16,28 @@ const author = new GraphQLObjectType({
   name: 'Author',
   fields: () => ({
     id: {
-      type: GraphQLNonNull(GraphQLID),
+      type: new GraphQLNonNull(GraphQLID),
       description: 'Globally unique ID of the author',
       resolve: (obj: Author): string => {
         return Buffer.from(`author-${obj.id}`).toString('base64');
       },
     },
     _id: {
-      type: GraphQLNonNull(GraphQLID),
+      type: new GraphQLNonNull(GraphQLID),
       description: 'Database ID of the author',
       resolve: (obj: Author): number => {
         return obj.id;
       },
     },
     firstName: {
-      type: GraphQLNonNull(GraphQLString),
+      type: new GraphQLNonNull(GraphQLString),
       description: 'Author\'s first name',
       resolve: (obj: Author): string => {
         return obj.firstName;
       },
     },
     lastName: {
-      type: GraphQLNonNull(GraphQLString),
+      type: new GraphQLNonNull(GraphQLString),
       description: 'Author\'s last name',
       resolve: (obj: Author): string => {
         return obj.lastName;
@@ -77,7 +77,7 @@ const author = new GraphQLObjectType({
       }
     },
     createdAt: {
-      type: GraphQLNonNull(GraphQLString),
+      type: new GraphQLNonNull(GraphQLString),
       description: '',
       resolve: (obj: Author): string => {
         return formatDate(new Date(obj.createdAt));

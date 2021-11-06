@@ -33,7 +33,7 @@ export default {
       type: GraphQLString,
     },
     orderBy: {
-      type: GraphQLList(authorsOrder),
+      type: new GraphQLList(authorsOrder),
     },
   },
   resolve: async (_, args: AuthorsQueryArguments, context: Context) => {

@@ -7,7 +7,7 @@ const createAuthor = {
   type: authorType,
   args: {
     input: {
-      type: GraphQLNonNull(newAuthor),
+      type: new GraphQLNonNull(newAuthor),
     },
   },
   resolve: (_, { input }, context: Context): Promise<any> => {
