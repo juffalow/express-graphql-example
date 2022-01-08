@@ -35,10 +35,10 @@ jobs:
         ports:
           - 3306
         env:
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
-          MYSQL_DATABASE: test
-          MYSQL_ROOT_PASSWORD: password
+          MYSQL_USER: quotes
+          MYSQL_PASSWORD: p4ssw0rd
+          MYSQL_DATABASE: quotes
+          MYSQL_ROOT_PASSWORD: p4ssw0rd
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
     steps:
     - uses: actions/checkout@v1
