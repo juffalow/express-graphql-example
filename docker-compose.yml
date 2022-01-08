@@ -18,7 +18,7 @@ services:
   application:
     image: node:16-alpine
     working_dir: /application
-    command: sh /application/.docker/node/start.sh
+    command: yarn install --frozen-lockfile && yarn start
     depends_on:
       - mysqldb
     restart: unless-stopped

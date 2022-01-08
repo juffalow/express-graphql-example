@@ -1,6 +1,3 @@
-/**
- * Please set those values via .env file
- */
 export default {
   port: process.env.PORT || 3010,
   database: {
