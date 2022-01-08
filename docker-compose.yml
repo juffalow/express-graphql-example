@@ -17,8 +17,8 @@ services:
 
   application:
     image: node:16-alpine
-    working_dir: /application
-    command: yarn install --frozen-lockfile && yarn start
+    working_dir: /home/node
+    command: sh -c "yarn install --frozen-lockfile && yarn start"
     depends_on:
       - mysqldb
     restart: unless-stopped
@@ -36,7 +36,7 @@ services:
     links:
       - mysqldb
     volumes:
-      - ".:/application"
+      - ".:/home/node"
 
 
 volumes:
