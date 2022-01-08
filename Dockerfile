@@ -1,7 +1,9 @@
 FROM node:16-alpine AS build
 
-USER node
 RUN mkdir /home/node/express-graphql-example/ && chown -R node:node /home/node/express-graphql-example
+
+USER node
+
 WORKDIR /home/node/express-graphql-example
 
 COPY --chown=node:node . .

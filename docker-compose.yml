@@ -2,7 +2,9 @@ services:
   mysqldb:
     image: mysql
     restart: unless-stopped
-    env_file: ./.env
+    env_file:
+      -  ./.env
+      - ./.env.local
     environment:
       - MYSQL_DATABASE=${DATABASE_NAME}
       - MYSQL_USER=${DATABASE_USER}
@@ -14,13 +16,15 @@ services:
       - 'mysql_data:/mysql/data'
 
   application:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
+    image: node:16-alpine
+    working_dir: /application
+    command: sh /application/.docker/node/start.sh
     depends_on:
       - mysqldb
     restart: unless-stopped
-    env_file: ./.env
+    env_file:
+      - ./.env
+      - ./.env.local
     ports:
       - ${PORT}:${PORT}
     environment:
@@ -32,7 +36,7 @@ services:
     links:
       - mysqldb
     volumes:
-      - "./src:/application/src"
+      - ".:/application"
 
 
 volumes:
