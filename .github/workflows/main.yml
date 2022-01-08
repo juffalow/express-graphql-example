@@ -54,7 +54,7 @@ jobs:
     - name: Rename config
       env:
         PORT: ${{ job.services.mariadb.ports[3306] }}
-      run: cat src/config.ts | sed "s/3306/123/g" > src/config.tmp && mv src/config.tmp src/config.ts
+      run: cat src/config.ts | sed "s/3306/$PORT/g" > src/config.tmp && mv src/config.tmp src/config.ts
     - name: Build projects, run migrations and seeds
       run: |
         yarn run build
