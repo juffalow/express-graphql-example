@@ -69,7 +69,6 @@ jobs:
     if: github.event_name == 'release'
     steps:
     - uses: actions/checkout@v2
-
     - name: Build
       run: docker build -t $ORGANIZATION/$PROJECT_NAME .
     - name: Install doctl
