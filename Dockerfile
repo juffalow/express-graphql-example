@@ -7,13 +7,18 @@ RUN yarn install --frozen-lockfile && yarn build
 
 FROM node:16-alpine
 
-USER node
-EXPOSE 3010
+RUN addgroup --gid 3000 --system juffgroup \
+  && adduser  --uid 2000 --system --ingroup juffgroup juffuser
 
-WORKDIR /home/node
+USER 2000:3000
 
-COPY --chown=node:node --from=build /home/node/dist ./dist
-COPY --chown=node:node --from=build /home/node/package.json /home/node/yarn.lock ./
+RUN mkdir /home/juffuser/express-graphql-example/
+WORKDIR /home/juffuser/express-graphql-example/
+
+COPY --from=build /home/node/dist ./dist
+COPY --from=build /home/node/package.json /home/node/yarn.lock ./
 RUN yarn install --frozen-lockfile --production
+
+EXPOSE 3010
 
 CMD [ "node", "dist/index.js" ]
