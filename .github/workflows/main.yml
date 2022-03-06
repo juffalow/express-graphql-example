@@ -21,6 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 16
+        cache: 'yarn'
     - name: Install dependencies
       run: yarn install
     - name: Run lint
@@ -42,6 +46,10 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
     steps:
     - uses: actions/checkout@v1
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 16
+        cache: 'yarn'
     - name: Install dependencies
       run: yarn install
     - name: Verify MariaDB connection
