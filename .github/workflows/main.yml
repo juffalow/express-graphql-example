@@ -79,11 +79,14 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 1
+    - name: Set variables
+      id: vars
+      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ZDIELAJ_SI_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_ZDIELAJ_SI_SECRET_ACCESS_KEY }}
+        aws-access-key-id: ${{ secrets.AWS_GRAPHQL_JUFFALOW_COM_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_GRAPHQL_JUFFALOW_COM_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_CONTAINER_REGISTRY_REGION }}
     - name: Login to Amazon ECR
       id: login-ecr
@@ -92,7 +95,7 @@ jobs:
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         REPOSITORY: express-graphql-example
-        TAG: ${GITHUB_REF#"refs/tags/"}
+        TAG: ${{ steps.vars.outputs.tag }}
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$TAG .
         docker push $REGISTRY/$REPOSITORY:$TAG
