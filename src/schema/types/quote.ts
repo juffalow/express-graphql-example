@@ -7,7 +7,6 @@ import {
 import Context from '../../context/Context';
 import author from './author';
 import { formatDate } from '../../utils/functions';
-import { Quote, Author } from '../../types';
 
 const quote = new GraphQLObjectType({
   name: 'Quote',

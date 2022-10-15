@@ -1,7 +1,4 @@
 import DataLoader from 'dataloader';
-import AuthorRepository from '../repositories/AuthorRepository';
-import QuoteRepository from '../repositories/QuoteRepository';
-import { Author } from '../types';
 
 interface RepositoriesContext {
   author: AuthorRepository;

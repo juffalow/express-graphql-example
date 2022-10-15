@@ -1,6 +1,4 @@
-import AuthorRepository, { CreateParameters, FindParameters, CountParameters } from './AuthorRepository';
 import database from '../database';
-import { Author } from '../types';
 
 export default class AuthorKnexRepository implements AuthorRepository {
   public async get(id: number): Promise<Author> {
@@ -16,7 +14,7 @@ export default class AuthorKnexRepository implements AuthorRepository {
       .whereIn('id', ids);
   }
 
-  public async find(params: FindParameters): Promise<Author[]> {
+  public async find(params: AuthorRepository.FindParameters): Promise<Author[]> {
     const { first, after, firstName, lastName, orderBy } = params;
 
     return database.select()
@@ -41,7 +39,7 @@ export default class AuthorKnexRepository implements AuthorRepository {
       .limit(first);
   }
 
-  public async count(params: CountParameters): Promise<number> {
+  public async count(params: AuthorRepository.CountParameters): Promise<number> {
     const { firstName, lastName } = params;
 
     return database.count({ count: '*' })
@@ -59,7 +57,7 @@ export default class AuthorKnexRepository implements AuthorRepository {
       .then(result => result.count);
   }
 
-  public async create(params: CreateParameters): Promise<Author> {
+  public async create(params: AuthorRepository.CreateParameters): Promise<Author> {
     return database.insert({
       firstName: params.firstName,
       lastName: params.lastName,

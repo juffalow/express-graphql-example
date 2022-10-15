@@ -10,7 +10,6 @@ import { formatDate } from '../../utils/functions';
 import quoteConnection from './connections/quoteConnection';
 import nodesToEdges from '../queries/nodesToEdges';
 import toConnection from '../queries/toConnection';
-import { Author } from '../../types';
 
 const author = new GraphQLObjectType({
   name: 'Author',
