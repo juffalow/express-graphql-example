@@ -6,6 +6,12 @@ export default new GraphQLEnumType({
     ID: {
       value: 'id',
     },
+    FIRST_NAME: {
+      value: 'firstName',
+    },
+    LAST_NAME: {
+      value: 'lastName',
+    },
     CREATED_AT: {
       value: 'createdAt',
     },
