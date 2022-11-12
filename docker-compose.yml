@@ -16,7 +16,7 @@ services:
       - 'mysql_data:/mysql/data'
 
   application:
-    image: node:16-alpine
+    image: node:18-alpine
     working_dir: /home/node
     command: sh -c "yarn install --frozen-lockfile && yarn start"
     depends_on:

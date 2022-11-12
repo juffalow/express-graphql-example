@@ -1,11 +1,11 @@
-FROM node:16-alpine AS build
+FROM node:18-alpine AS build
 
 WORKDIR /home/node
 
 COPY . .
 RUN yarn install --frozen-lockfile && yarn build
 
-FROM node:16-alpine
+FROM node:18-alpine
 
 RUN addgroup --gid 3000 --system juffgroup \
   && adduser  --uid 2000 --system --ingroup juffgroup juffuser
