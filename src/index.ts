@@ -1,5 +1,5 @@
 import express from 'express';
-import graphqlHTTP from 'express-graphql';
+import { createHandler } from 'graphql-http/lib/use/express';
 import responseTime from './middlewares/reponseTime';
 import cors from './middlewares/cors';
 import config from './config';
@@ -14,12 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(responseTime);
 app.use(cors);
 
-app.use('/graphql', graphqlHTTP({
-  context,
-  graphiql: {
-    defaultQuery: config.defaultQuery,
-  } as undefined,
+app.all('/graphql', createHandler({
   schema,
+  context: context as any,
 }));
 
 async function start(): Promise<void> {
