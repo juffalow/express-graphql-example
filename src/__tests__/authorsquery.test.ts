@@ -1,6 +1,6 @@
 import request from 'supertest';
 import express from 'express';
-import graphqlHTTP from 'express-graphql';
+import { createHandler } from 'graphql-http/lib/use/express';
 import context from '../context';
 import schema from '../schema';
 import database from '../database';
@@ -12,8 +12,8 @@ afterAll(() => {
 test('Authors query', async () => {
   const app = express();
 
-  app.use('/graphql', graphqlHTTP({
-    context,
+  app.use('/graphql', createHandler({
+    context: context as any,
     schema,
   }));
 
@@ -76,8 +76,8 @@ test('Authors query', async () => {
 test('Authors query with order by argument', async () => {
   const app = express();
 
-  app.use('/graphql', graphqlHTTP({
-    context,
+  app.use('/graphql', createHandler({
+    context: context as any,
     schema,
   }));
 
@@ -140,8 +140,8 @@ test('Authors query with order by argument', async () => {
 test('Authors query with filter by first name and last name', async () => {
   const app = express();
 
-  app.use('/graphql', graphqlHTTP({
-    context,
+  app.use('/graphql', createHandler({
+    context: context as any,
     schema,
   }));
 
