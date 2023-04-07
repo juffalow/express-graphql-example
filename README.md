@@ -76,6 +76,9 @@ Here is a link to an old version, that used `sequelize` and did not use connecti
 Here is a link to older version, that did not use typescript, and used `buildSchema` method and graphql schema file:
 * [2.0.0](https://github.com/juffalow/express-graphql-example/tree/2.0.0)
 
+Here is a link to older version, that used typescript version `4.x` and `graphql-express` package to handle GrahpQL requests:
+* [3.3.0](https://github.com/juffalow/express-graphql-example/tree/3.3.0)
+
 ## License
 
 [MIT license](./LICENSE)
