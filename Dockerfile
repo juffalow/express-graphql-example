@@ -1,11 +1,15 @@
-FROM node:20-alpine AS build
+FROM node:22-alpine AS build
 
 WORKDIR /home/node
 
 COPY . .
 RUN yarn install --frozen-lockfile && yarn build
 
-FROM node:20-alpine
+FROM node:22-alpine
+
+ENV NODE_ENV production
+
+RUN apk update && apk upgrade --no-cache
 
 RUN addgroup --gid 3000 --system juffgroup \
   && adduser  --uid 2000 --system --ingroup juffgroup juffuser
