@@ -35,11 +35,11 @@ jobs:
         ports:
           - 3306
         env:
-          MYSQL_USER: quotes
-          MYSQL_PASSWORD: p4ssw0rd
-          MYSQL_DATABASE: quotes
-          MYSQL_ROOT_PASSWORD: p4ssw0rd
-        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+          MARIADB_USER: quotes
+          MARIADB_PASSWORD: p4ssw0rd
+          MARIADB_DATABASE: quotes
+          MARIADB_ROOT_PASSWORD: p4ssw0rd
+        options: --health-cmd="mariadb-admin ping" --health-interval=5s --health-timeout=2s --health-retries=3
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
