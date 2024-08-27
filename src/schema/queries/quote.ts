@@ -1,9 +1,9 @@
 import { GraphQLID, GraphQLNonNull } from 'graphql';
 import Context from '../../context/Context';
-import { default as quoteType } from '../types/quote';
+import types from '../types'
 
 const quote = {
-  type: quoteType,
+  type: types.Quote,
   args: {
     id: {
       type: new GraphQLNonNull(GraphQLID),

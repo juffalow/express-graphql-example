@@ -4,6 +4,7 @@ import authorConnection from '../types/connections/authorConnection';
 import authorsOrder from '../types/inputs/authorsOrder';
 import nodesToEdges from './nodesToEdges';
 import toConnection from './toConnection';
+import types from '../types';
 
 interface AuthorsQueryArguments {
   first: number;
@@ -14,7 +15,7 @@ interface AuthorsQueryArguments {
 }
 
 export default {
-  type: authorConnection,
+  type: types.AuthorConnection,
   args: {
     first: {
       defaultValue: 10,

@@ -1,9 +1,9 @@
 import { GraphQLID, GraphQLNonNull } from 'graphql';
 import Context from '../../context/Context';
-import { default as authorType } from '../types/author';
+import types from '../types';
 
 const author = {
-  type: authorType,
+  type: types.Author,
   args: {
     id: {
       type: new GraphQLNonNull(GraphQLID),

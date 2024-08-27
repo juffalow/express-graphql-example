@@ -1,12 +1,11 @@
 import { GraphQLObjectType } from 'graphql';
-import createAuthor from './mutations/createAuthor';
-import deleteAuthor from './mutations/deleteAuthor';
+import types from './types'
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
-  fields: (): any => ({
-    createAuthor,
-    deleteAuthor,
+  fields: () => ({
+    createAuthor: types.CreateAuthor,
+    deleteAuthor: types.DeleteAuthor,
   }),
 });
 

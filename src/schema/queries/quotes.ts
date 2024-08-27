@@ -3,6 +3,7 @@ import Context from '../../context/Context';
 import quoteConnection from '../types/connections/quoteConnection';
 import nodesToEdges from './nodesToEdges';
 import toConnection from './toConnection';
+import types from '../types';
 
 interface QuotesQueryArguments {
   first: number;
@@ -11,7 +12,7 @@ interface QuotesQueryArguments {
 }
 
 export default {
-  type: quoteConnection,
+  type: types.QuoteConnection,
   args: {
     first: {
       defaultValue: 10,
