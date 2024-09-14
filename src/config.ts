@@ -3,11 +3,11 @@ export default {
   database: {
     type: 'mysql',
     connection: {
-      host: process.env.DATABASE_HOST || '127.0.0.1',
-      port: process.env.DATABASE_PORT || 3306,
-      database: process.env.DATABASE_NAME || 'quotes',
-      user: process.env.DATABASE_USER || 'quotes',
-      password: process.env.DATABASE_PASSWORD || 'p4ssw0rd',
+      host: process.env.DATABASE_HOST,
+      port: process.env.DATABASE_PORT,
+      database: process.env.DATABASE_NAME,
+      user: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
     },
     migrations: {
       directory: __dirname + '/migrations',
