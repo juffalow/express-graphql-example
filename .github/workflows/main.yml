@@ -57,7 +57,7 @@ jobs:
         done
     - name: Build projects, run migrations and seeds
       env:
-        DATABASE_HOST: 127.0.0.1
+        DATABASE_HOST: "127.0.0.1"
         DATABASE_NAME: quotes
         DATABASE_USER: quotes
         DATABASE_PASSWORD: p4ssw0rd
