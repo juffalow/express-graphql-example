@@ -68,6 +68,11 @@ jobs:
         yarn run seed
     - name: Run tests
       env:
+        DATABASE_HOST: "127.0.0.1"
+        DATABASE_NAME: quotes
+        DATABASE_USER: quotes
+        DATABASE_PASSWORD: p4ssw0rd
+        DATABASE_PORT: ${{ job.services.mariadb.ports[3306] }}
         TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: |
         yarn test
