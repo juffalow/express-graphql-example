@@ -70,35 +70,6 @@ jobs:
       run: |
         yarn test
         CODECOV_TOKEN="$TOKEN" bash <(curl -s https://codecov.io/bash)
-  build:
-    name: Build container with tag version
-    if: github.event_name == 'release'
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 1
-    - name: Set variables
-      id: vars
-      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_GRAPHQL_JUFFALOW_COM_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_GRAPHQL_JUFFALOW_COM_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_CONTAINER_REGISTRY_REGION }}
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-    - name: Build, tag and push docker image to Amazon ECR
-      env:
-        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        REPOSITORY: express-graphql-example
-        TAG: ${{ steps.vars.outputs.tag }}
-      run: |
-        docker build -t $REGISTRY/$REPOSITORY:$TAG .
-        docker push $REGISTRY/$REPOSITORY:$TAG
   push_latest_dockerhub:
     name: Push image with latest tag to DockerHub
     if: github.event_name == 'push'
