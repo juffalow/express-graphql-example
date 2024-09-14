@@ -71,11 +71,11 @@ export default class QuoteKnexRepository implements QuoteRepository {
     const { authorId, query } = params;
 
     const count = quotesList.filter((quote) => {
-      if (typeof authorId !== 'undefined' && quote.authorId === authorId) {
+      if (typeof authorId !== 'undefined' && authorId !== null && quote.authorId === authorId) {
         return false;
       }
 
-      if (typeof query !== 'undefined' && quote.text.indexOf(query) === -1) {
+      if (typeof query !== 'undefined' && query !== null && quote.text.indexOf(query) === -1) {
         return false;
       }
 

@@ -50,11 +50,11 @@ export default class AuthorKnexRepository implements AuthorRepository {
     const { first, after, firstName, lastName, orderBy } = params;
 
     const authors = authorsList.filter((author) => {
-      if (typeof firstName !== 'undefined' && author.firstName.startsWith(firstName) === false) {
+      if (typeof firstName !== 'undefined' && firstName !== null && author.firstName.startsWith(firstName) === false) {
         return false;
       }
 
-      if (typeof lastName !== 'undefined' && author.lastName.startsWith(lastName) === false) {
+      if (typeof lastName !== 'undefined' && lastName !== null && author.lastName.startsWith(lastName) === false) {
         return false;
       }
 
