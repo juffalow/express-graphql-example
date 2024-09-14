@@ -6,6 +6,9 @@ import config from '../config';
 
 const container = {
   get Author(): AuthorRepository {
+    console.log('config.database.connection.host', config.database.connection.host);
+    console.log('typeof config.database.connection.host', typeof config.database.connection.host);
+
     if (typeof this._author === 'undefined') {
       if (typeof config.database.connection.host === 'string') {
         this._author = new AuthorKnexRepository();
@@ -18,6 +21,9 @@ const container = {
   },
 
   get Quote(): QuoteRepository {
+    console.log('config.database.connection.host', config.database.connection.host);
+    console.log('typeof config.database.connection.host', typeof config.database.connection.host);
+    
     if (typeof this._quote === 'undefined') {
       if (typeof config.database.connection.host === 'string') {
         this._quote = new QuoteKnexRepository();
