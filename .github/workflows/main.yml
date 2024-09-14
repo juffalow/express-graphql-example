@@ -55,11 +55,10 @@ jobs:
         while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
           sleep 1
         done
-    - name: Rename config
-      env:
-        PORT: ${{ job.services.mariadb.ports[3306] }}
-      run: cat src/config.ts | sed "s/3306/$PORT/g" > src/config.tmp && mv src/config.tmp src/config.ts
     - name: Build projects, run migrations and seeds
+      env:
+        DATABASE_HOST: 127.0.0.1
+        DATABASE_PORT: ${{ job.services.mariadb.ports[3306] }}
       run: |
         yarn run build
         yarn run migrate
