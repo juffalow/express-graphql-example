@@ -10,7 +10,7 @@ const quote = {
     },
   },
   resolve: (_, { id }, context: Context) => {
-    return context.repositories.quote.get(id);
+    return context.repositories.quote.get(parseInt(id));
   },
 };
 

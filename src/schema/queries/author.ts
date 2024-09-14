@@ -10,7 +10,7 @@ const author = {
     },
   },
   resolve: (_, { id }, context: Context): Promise<any> => {
-    return context.repositories.author.get(id);
+    return context.repositories.author.get(parseInt(id));
   },
 };
 

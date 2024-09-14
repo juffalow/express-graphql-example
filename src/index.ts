@@ -5,7 +5,7 @@ import cors from './middlewares/cors';
 import config from './config';
 import context from './context';
 import schema from './schema';
-import database from './database';
+import { checkConnection, migrate } from './database';
 
 const app = express();
 
@@ -22,11 +22,12 @@ app.all('/graphql', createHandler({
 
 async function start(): Promise<void> {
   try {
-    // check database connection
-    await database.raw('SELECT 1 + 1 AS result');
+    if (typeof config.database.connection.host === 'string') {
+      await checkConnection();
 
-    if ('migrations' in config.database) {
-      await database.migrate.latest({ directory: config.database.migrations.directory });
+      if ('migrations' in config.database) {
+        await migrate();
+      }
     }
 
     app.listen(config.port, () => {
