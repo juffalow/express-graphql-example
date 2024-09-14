@@ -99,3 +99,57 @@ jobs:
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$TAG .
         docker push $REGISTRY/$REPOSITORY:$TAG
+  push_latest_dockerhub:
+    name: Push image with latest tag to DockerHub
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    needs: [lint_test_build]
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+    - name: Login to DockerHub
+      env:
+        DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+        DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      run: docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_ACCESS_TOKEN 
+    - name: Build and tag Docker image
+      env:
+        USER: ${{ secrets.DOCKER_HUB_USER }}
+        REPOSITORY: express-graphql-example
+        TAG: latest
+      run: docker build -t $USER/$REPOSITORY:$TAG .
+    - name: Push Docker image
+      env:
+        USER: ${{ secrets.DOCKER_HUB_USER }}
+        REPOSITORY: express-graphql-example
+        TAG: latest
+      run: docker push $USER/$REPOSITORY:$TAG
+  push_release_dockerhub:
+    name: Push image with release version tag to DockerHub
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+    - name: Set tag variable
+      id: version
+      run: echo ::set-output name=tag::${GITHUB_REF#"refs/tags/"}
+    - name: Login to DockerHub
+      env:
+        DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+        DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      run: docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_ACCESS_TOKEN 
+    - name: Build and tag Docker image
+      env:
+        USER: ${{ secrets.DOCKER_HUB_USER }}
+        REPOSITORY: express-graphql-example
+        TAG: ${{ steps.version.outputs.tag }}
+      run: docker build -t $USER/$REPOSITORY:$TAG .
+    - name: Push Docker image
+      env:
+        USER: ${{ secrets.DOCKER_HUB_USER }}
+        REPOSITORY: express-graphql-example
+        TAG: ${{ steps.version.outputs.tag }}
+      run: docker push $USER/$REPOSITORY:$TAG
