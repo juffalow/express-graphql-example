@@ -1,6 +1,5 @@
 import { GraphQLInt, GraphQLString } from 'graphql';
 import Context from '../../context/Context';
-import quoteConnection from '../types/connections/quoteConnection';
 import nodesToEdges from './nodesToEdges';
 import toConnection from './toConnection';
 import types from '../types';

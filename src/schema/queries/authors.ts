@@ -1,6 +1,5 @@
 import { GraphQLInt, GraphQLString, GraphQLList } from 'graphql';
 import Context from '../../context/Context';
-import authorConnection from '../types/connections/authorConnection';
 import authorsOrder from '../types/inputs/authorsOrder';
 import nodesToEdges from './nodesToEdges';
 import toConnection from './toConnection';
@@ -11,7 +10,7 @@ interface AuthorsQueryArguments {
   after: string;
   firstName: string;
   lastName: string;
-  orderBy: any[];
+  orderBy: OrderBy[];
 }
 
 export default {

@@ -1,12 +1,11 @@
 import Context from './Context';
-import AuthorRepository from '../repositories/AuthorKnexRepository';
-import QuoteRepository from '../repositories/QuoteKnexRepository';
+import repositories from '../repositories';
 import authorLoader from '../loaders/authorLoader';
 
 const context: Context = {
   repositories: {
-    author: new AuthorRepository(),
-    quote: new QuoteRepository(),
+    author: repositories.Author,
+    quote: repositories.Quote,
   },
   loaders: {
     author: authorLoader,

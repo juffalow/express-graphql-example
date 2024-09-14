@@ -1,9 +1,8 @@
 import DataLoader from 'dataloader';
-import AuthorRepository from '../repositories/AuthorKnexRepository';
+import repositories from '../repositories';
 
 async function getAuthorsById(ids: number[]): Promise<Author[]> {
-  const authorRepository = new AuthorRepository();
-  const authors = await authorRepository.getMany(ids);
+  const authors = await repositories.Author.getMany(ids);
   return ids.map((id) => {
     return authors.find((author) => author.id === id);
   });
