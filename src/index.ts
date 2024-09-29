@@ -1,24 +1,30 @@
-import express from 'express';
-import { createHandler } from 'graphql-http/lib/use/express';
-import responseTime from './middlewares/reponseTime';
-import cors from './middlewares/cors';
+import http from 'http';
+import { createTerminus } from '@godaddy/terminus';
+import app from './app';
 import config from './config';
-import context from './context';
-import schema from './schema';
 import { checkConnection, migrate } from './database';
 
-const app = express();
+const server = http.createServer(app);
 
-app.disable('x-powered-by');
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(responseTime);
-app.use(cors);
+async function onSignal(): Promise<void> {
+  console.warn('Server is going to shut down! Starting cleanup...');
+}
 
-app.all('/graphql', createHandler({
-  schema,
-  context: context as any,
-}));
+async function onShutdown (): Promise<void> {
+  console.warn('Server is shutting down!');
+}
+
+async function onHealthCheck(): Promise<void> {
+  return;
+}
+
+createTerminus(server, {
+  healthChecks: {
+    '/health/liveness': onHealthCheck,
+  },
+  onSignal,
+  onShutdown,
+});
 
 async function start(): Promise<void> {
   try {
@@ -30,7 +36,7 @@ async function start(): Promise<void> {
       }
     }
 
-    app.listen(config.port, () => {
+    server.listen(config.port, () => {
       console.log(`Server started at http://localhost:${ config.port }`);
     });
   } catch(error) {

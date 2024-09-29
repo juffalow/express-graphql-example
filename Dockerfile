@@ -1,28 +1,33 @@
 FROM node:22-alpine AS build
 
+RUN apk add dumb-init
+
 WORKDIR /home/node
 
 COPY . .
-RUN yarn install --frozen-lockfile && yarn build
+
+RUN yarn install --frozen-lockfile
+RUN yarn build
 
 FROM node:22-alpine
 
 ENV NODE_ENV production
 
-RUN apk update && apk upgrade --no-cache
+COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 
-RUN addgroup --gid 3000 --system juffgroup \
-  && adduser  --uid 2000 --system --ingroup juffgroup juffuser
+RUN apk update && \
+  apk upgrade --no-cache && \
+  addgroup --gid 3000 --system juffgroup && \
+  adduser  --uid 2000 --system --ingroup juffgroup juffuser && \
+  mkdir /home/juffuser/express-graphql-example/
 
 USER 2000:3000
 
-RUN mkdir /home/juffuser/express-graphql-example/
 WORKDIR /home/juffuser/express-graphql-example/
 
 COPY --from=build /home/node/dist ./dist
-COPY --from=build /home/node/package.json /home/node/yarn.lock ./
-RUN yarn install --frozen-lockfile --production
+COPY --from=build /home/node/node-modules ./node-modules
 
 EXPOSE 3010
 
-CMD [ "node", "dist/index.js" ]
+CMD [ "dumb-init", "node", "dist/index.js" ]
