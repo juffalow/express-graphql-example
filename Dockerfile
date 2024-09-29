@@ -26,7 +26,7 @@ USER 2000:3000
 WORKDIR /home/juffuser/express-graphql-example/
 
 COPY --from=build /home/node/dist ./dist
-COPY --from=build /home/node/node-modules ./node-modules
+COPY --from=build /home/node/node_modules ./node_modules
 
 EXPOSE 3010
 
