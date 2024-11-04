@@ -3,15 +3,16 @@ import { createTerminus } from '@godaddy/terminus';
 import app from './app';
 import config from './config';
 import { checkConnection, migrate } from './database';
+import logger from './logger';
 
 const server = http.createServer(app);
 
 async function onSignal(): Promise<void> {
-  console.warn('Server is going to shut down! Starting cleanup...');
+  logger.warn('Server is going to shut down! Starting cleanup...');
 }
 
 async function onShutdown (): Promise<void> {
-  console.warn('Server is shutting down!');
+  logger.warn('Server is shutting down!');
 }
 
 async function onHealthCheck(): Promise<void> {
@@ -37,9 +38,10 @@ async function start(): Promise<void> {
     }
 
     server.listen(config.port, () => {
-      console.log(`Server started at http://localhost:${ config.port }`);
+      logger.info(`Server started at http://localhost:${ config.port }`);
     });
-  } catch(error) {
+  } catch(err) {
+    logger.error('Unable to start server!', { error: { message: err.message, stack: err.stack } });
     process.exit(1);
   }
 }

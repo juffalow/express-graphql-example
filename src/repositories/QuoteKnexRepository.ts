@@ -1,8 +1,11 @@
 import database from '../database';
+import logger from '../logger';
 
 export default class QuoteKnexRepository implements QuoteRepository {
 
   public async get(id: number): Promise<Quote> {
+    logger.debug(`${this.constructor.name}.get`, { id });
+
     return database.select()
       .from('quote')
       .where('id', id)
@@ -10,6 +13,8 @@ export default class QuoteKnexRepository implements QuoteRepository {
   }
 
   public async find(params: QuoteRepository.FindParameters): Promise<Quote[]> {
+    logger.debug(`${this.constructor.name}.find`, { params });
+
     const { first, after, authorId, query } = params;
 
     return database.select()
@@ -31,6 +36,8 @@ export default class QuoteKnexRepository implements QuoteRepository {
   }
 
   public async count(params: QuoteRepository.CountParameters): Promise<number> {
+    logger.debug(`${this.constructor.name}.count`, { params });
+    
     const { authorId, query } = params;
 
     return database.count({ count: '*' })

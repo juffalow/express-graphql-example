@@ -1,3 +1,5 @@
+import logger from '../logger';
+
 const authorsList = [
   { id: 1, firstName: 'John', lastName: 'Johnson', createdAt: '2024-09-14 13:13:00' },
   { id: 2, firstName: 'Martin', lastName: 'Fowler', createdAt: '2024-09-14 13:13:01' },
@@ -35,18 +37,24 @@ const authorsList = [
 
 export default class AuthorKnexRepository implements AuthorRepository {
   public async get(id: number): Promise<Author> {
+    logger.debug(`${this.constructor.name}.get`, { id });
+
     const author = authorsList.find((author) => author.id === id);
 
     return author;
   }
 
   public async getMany(ids: number[]): Promise<Author[]> {
+    logger.debug(`${this.constructor.name}.getMany`, { ids });
+
     const authors = authorsList.filter((author) => ids.includes(author.id));
 
     return authors;
   }
 
   public async find(params: AuthorRepository.FindParameters): Promise<Author[]> {
+    logger.debug(`${this.constructor.name}.find`, { params });
+
     const { first, after, firstName, lastName, orderBy } = params;
 
     const authors = authorsList.filter((author) => {
@@ -77,6 +85,8 @@ export default class AuthorKnexRepository implements AuthorRepository {
   }
 
   public async count(params: AuthorRepository.CountParameters): Promise<number> {
+    logger.debug(`${this.constructor.name}.count`, { params });
+
     const { firstName, lastName } = params;
 
     const count = authorsList.filter((author) => {
@@ -95,6 +105,8 @@ export default class AuthorKnexRepository implements AuthorRepository {
   }
 
   public async create(params: AuthorRepository.CreateParameters): Promise<Author> {
+    logger.debug(`${this.constructor.name}.create`, { params });
+
     const author = {
       id: authorsList.length + 1,
       firstName: params.firstName,
@@ -108,6 +120,8 @@ export default class AuthorKnexRepository implements AuthorRepository {
   }
 
   public async update(id: number, firstName: string, lastName: string): Promise<Author> {
+    logger.debug(`${this.constructor.name}.update`, { id, firstName, lastName });
+    
     const author = authorsList.find((author) => author.id === id);
 
     const authorIndex = authorsList.findIndex((author) => author.id === id);
@@ -126,6 +140,8 @@ export default class AuthorKnexRepository implements AuthorRepository {
   }
 
   public async delete(id: number): Promise<Author> {
+    logger.debug(`${this.constructor.name}.delete`, { id });
+
     const author = authorsList.find((author) => author.id === id);
     const authorIndex = authorsList.findIndex((author) => author.id === id);
 

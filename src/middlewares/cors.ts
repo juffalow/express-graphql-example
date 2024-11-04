@@ -1,3 +1,5 @@
+import type { Request, Response, NextFunction } from 'express';
+
 /**
  * Adds CORS headers to the response. If type of the request is OPTIONS,
  * it will return it immediately and will not continue processing the request.
@@ -7,7 +9,7 @@
  * @param res
  * @param next
  */
-export default function cors(req, res, next): void {
+export default function cors(req: Request, res: Response, next: NextFunction): void {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');

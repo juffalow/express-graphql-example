@@ -1,3 +1,5 @@
+import logger from '../logger';
+
 const quotesList = [
   { id: 1, authorId: 1, text: 'First, solve the problem. Then, write the code.', createdAt: '2024-09-14 13:59:00' },
   { id: 2, authorId: 2, text: 'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.', createdAt: '2024-09-14 13:59:01' },
@@ -44,12 +46,16 @@ const quotesList = [
 export default class QuoteKnexRepository implements QuoteRepository {
 
   public async get(id: number): Promise<Quote> {
+    logger.debug(`${this.constructor.name}.get`, { id });
+
     const quote = quotesList.find((q) => q.id === id);
 
     return quote;
   }
 
   public async find(params: QuoteRepository.FindParameters): Promise<Quote[]> {
+    logger.debug(`${this.constructor.name}.find`, { params });
+
     const { first, after, authorId, query } = params;
 
     const quotes = quotesList.filter((quote) => {
@@ -68,6 +74,8 @@ export default class QuoteKnexRepository implements QuoteRepository {
   }
 
   public async count(params: QuoteRepository.CountParameters): Promise<number> {
+    logger.debug(`${this.constructor.name}.count`, { params });
+    
     const { authorId, query } = params;
 
     const count = quotesList.filter((quote) => {

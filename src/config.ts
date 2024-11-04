@@ -1,5 +1,8 @@
 export default {
   port: process.env.PORT || 3010,
+  logger: {
+    level: process.env.LOG_LEVEL || 'debug',
+  },
   database: {
     type: 'mysql',
     connection: {
