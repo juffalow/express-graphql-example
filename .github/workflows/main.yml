@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Enable corepack
+      run: corepack enable
     - uses: actions/setup-node@v4
       env:
         yarn: 4.5.1
@@ -44,6 +46,8 @@ jobs:
         options: --health-cmd="mariadb-admin ping" --health-interval=5s --health-timeout=2s --health-retries=3
     steps:
     - uses: actions/checkout@v4
+    - name: Enable corepack
+      run: corepack enable
     - uses: actions/setup-node@v4
       env:
         yarn: 4.5.1
