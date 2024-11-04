@@ -1,12 +1,15 @@
 FROM node:22-alpine AS build
 
+RUN corepack enable
+RUN yarn set version berry
+
 RUN apk add dumb-init
 
 WORKDIR /home/node
 
 COPY . .
 
-RUN yarn install --frozen-lockfile
+RUN yarn install --immutable
 RUN yarn build
 
 FROM node:22-alpine
@@ -17,6 +20,8 @@ COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 
 RUN apk update && \
   apk upgrade --no-cache && \
+  corepack enable && \
+  yarn set version berry && \
   addgroup --gid 3000 --system juffgroup && \
   adduser  --uid 2000 --system --ingroup juffgroup juffuser && \
   mkdir /home/juffuser/express-graphql-example/

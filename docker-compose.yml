@@ -3,8 +3,8 @@ services:
     image: mysql
     restart: unless-stopped
     env_file:
-      - ./.env
       - ./.env.local
+      - ./.env
     environment:
       - MYSQL_DATABASE=${DATABASE_NAME}
       - MYSQL_USER=${DATABASE_USER}
@@ -18,26 +18,19 @@ services:
   application:
     image: node:22-alpine
     working_dir: /home/node
-    command: sh -c "yarn install --frozen-lockfile && yarn start"
+    command: sh -c "corepack enable && yarn set version berry && yarn install && yarn start"
     depends_on:
       - mysqldb
     restart: unless-stopped
     env_file:
-      - ./.env
       - ./.env.local
+      - ./.env
     ports:
       - ${PORT}:${PORT}
-    environment:
-      - DATABASE_HOST=mysqldb
-      - DATABASE_USER=$DATABASE_USER
-      - DATABASE_PASSWORD=$DATABASE_PASSWORD
-      - DATABASE_NAME=$DATABASE_NAME
-      - DATABASE_PORT=$DATABASE_PORT
     links:
       - mysqldb
     volumes:
       - ".:/home/node"
-
 
 volumes:
    mysql_data:
