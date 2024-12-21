@@ -7,7 +7,7 @@
         "@godaddy/terminus": "^4.12.1",
         "cls-hooked": "^4.2.2",
         "dataloader": "^2.0.0",
-        "express": "^4.16.4",
+        "express": "^5.0.1",
         "graphql": "^16.0.1",
         "graphql-http": "^1.17.1",
         "knex": "^3.1.0",
@@ -24,7 +24,7 @@
         "seed": "knex seed:run"
     },
     "devDependencies": {
-        "@types/express": "^4.17.3",
+        "@types/express": "^5.0.0",
         "@types/jest": "^27.0.1",
         "@types/node": "^22.5.0",
         "@typescript-eslint/eslint-plugin": "^5.9.0",
