@@ -17,7 +17,7 @@ const redactedFormat = format((info) => {
     info.password = '******';
   }
 
-  if (typeof info['email'] !== 'undefined') {
+  if (typeof info['email'] !== 'undefined' && typeof info['email'] === 'string') {
     const [ name, domain ] = info.email.split('@');
     info.email = `${name.substring(0, 2)}${'*'.repeat(name.length - 2)}@${'*'.repeat(domain.length - 2)}${domain.substring(domain.length - 2)}`;
   }
