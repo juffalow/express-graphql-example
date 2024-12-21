@@ -79,6 +79,9 @@ Here is a link to older version, that did not use typescript, and used `buildSch
 Here is a link to older version, that used typescript version `4.x` and `graphql-express` package to handle GrahpQL requests:
 * [3.3.0](https://github.com/juffalow/express-graphql-example/tree/3.3.0)
 
+Here is a link to older version, that used `yarn` version `1.22` and `express` version `4`:
+* [3.5.0](https://github.com/juffalow/express-graphql-example/tree/3.5.0)
+
 ## License
 
 [MIT license](./LICENSE)
