@@ -8,8 +8,8 @@ export default function trace(req: Request, res: Response, next: NextFunction): 
     return;
   }
 
-  namespace.bind(req);
-  namespace.bind(res);
+  namespace.bind<any>(req);
+  namespace.bind<any>(res);
 
   const traceId = uuidv7();
 
