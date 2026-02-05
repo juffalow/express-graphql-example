@@ -1,4 +1,4 @@
-FROM node:22-alpine AS build
+FROM node:24-alpine AS build
 
 RUN corepack enable
 RUN yarn set version berry
@@ -12,9 +12,9 @@ COPY . .
 RUN yarn install --immutable
 RUN yarn build
 
-FROM node:22-alpine
+FROM node:24-alpine
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 

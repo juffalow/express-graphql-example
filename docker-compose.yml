@@ -16,7 +16,7 @@ services:
       - 'mysql_data:/mysql/data'
 
   application:
-    image: node:22-alpine
+    image: node:24-alpine
     working_dir: /home/node
     command: sh -c "corepack enable && yarn set version berry && yarn install && yarn start"
     depends_on:
