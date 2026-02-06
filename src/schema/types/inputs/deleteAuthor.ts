@@ -1,8 +1,4 @@
-import {
-  GraphQLInputObjectType,
-  GraphQLNonNull,
-  GraphQLInt,
-} from 'graphql';
+import { GraphQLInputObjectType, GraphQLNonNull, GraphQLInt } from 'graphql';
 
 const deleteAuthorInput = new GraphQLInputObjectType({
   name: 'deleteAuthorInput',

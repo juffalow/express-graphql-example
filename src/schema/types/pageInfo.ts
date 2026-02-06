@@ -1,8 +1,4 @@
-import {
-  GraphQLBoolean,
-  GraphQLObjectType,
-  GraphQLString,
-} from 'graphql';
+import { GraphQLBoolean, GraphQLObjectType, GraphQLString } from 'graphql';
 
 const pageInfo = new GraphQLObjectType({
   name: 'PageInfo',

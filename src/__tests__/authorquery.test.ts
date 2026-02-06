@@ -13,10 +13,13 @@ afterAll(() => {
 test('Author query', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
   const query = `
     query {
@@ -30,10 +33,7 @@ test('Author query', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -45,18 +45,21 @@ test('Author query', async () => {
         firstName: 'John',
         lastName: 'Johnson',
         createdAt: '2020-07-02 11:06:01',
-      }
-    }
+      },
+    },
   });
 });
 
 test('Author query with quote', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
   const query = `
     query {
@@ -79,10 +82,7 @@ test('Author query with quote', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -100,12 +100,12 @@ test('Author query with quote', async () => {
               node: {
                 id: 'cXVvdGUtMQ==',
                 _id: '1',
-                text: 'First, solve the problem. Then, write the code.'
-              }
-            }
-          ]
-        }
-      }
-    }
+                text: 'First, solve the problem. Then, write the code.',
+              },
+            },
+          ],
+        },
+      },
+    },
   });
 });

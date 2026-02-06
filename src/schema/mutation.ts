@@ -1,5 +1,5 @@
 import { GraphQLObjectType } from 'graphql';
-import types from './types'
+import types from './types';
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',

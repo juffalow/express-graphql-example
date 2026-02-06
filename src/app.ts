@@ -18,10 +18,13 @@ app.use(responseTime);
 app.use(cors);
 
 if (process.env.AWS_XRAY_ENABLED === 'true') app.use(AWSXRay.express.openSegment('express-graphql-example'));
-app.all('/graphql', createHandler({
-  schema,
-  context: context as unknown as OperationContext,
-}));
+app.all(
+  '/graphql',
+  createHandler({
+    schema,
+    context: context as unknown as OperationContext,
+  })
+);
 if (process.env.AWS_XRAY_ENABLED === 'true') app.use(AWSXRay.express.closeSegment());
 
 export default app;

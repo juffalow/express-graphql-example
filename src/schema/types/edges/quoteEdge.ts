@@ -1,9 +1,6 @@
-import {
-  GraphQLObjectType,
-  GraphQLString,
-} from 'graphql';
+import { GraphQLObjectType, GraphQLString } from 'graphql';
 
-export default function(types) {
+export default function (types) {
   return new GraphQLObjectType({
     name: 'QuoteEdge',
     description: 'List of edges.',

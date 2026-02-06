@@ -1,13 +1,8 @@
-import {
-  GraphQLID,
-  GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLString,
-} from 'graphql';
+import { GraphQLID, GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
 import Context from '../../context/Context';
 import { formatDate } from '../../utils/functions';
 
-export default function(types) {
+export default function (types) {
   return new GraphQLObjectType({
     name: 'Quote',
     fields: () => ({

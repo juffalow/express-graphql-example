@@ -13,10 +13,13 @@ afterAll(() => {
 test('Quotes query', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
   const query = `
     query {
@@ -33,10 +36,7 @@ test('Quotes query', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -49,38 +49,41 @@ test('Quotes query', async () => {
               id: 'cXVvdGUtMQ==',
               _id: '1',
               text: 'First, solve the problem. Then, write the code.',
-              createdAt: '2020-07-02 12:43:00'
-            }
+              createdAt: '2020-07-02 12:43:00',
+            },
           },
           {
             node: {
               id: 'cXVvdGUtMg==',
               _id: '2',
               text: 'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-              createdAt: '2020-07-02 12:43:01'
-            }
+              createdAt: '2020-07-02 12:43:01',
+            },
           },
           {
             node: {
               id: 'cXVvdGUtMw==',
               _id: '3',
               text: 'If you stop learning, then the projects you work on are stuck in whatever time period you decided to settle.',
-              createdAt: '2020-07-02 12:43:02'
-            }
+              createdAt: '2020-07-02 12:43:02',
+            },
           },
-        ]
-      }
-    }
+        ],
+      },
+    },
   });
 });
 
 test('Quotes query with authors', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
   const query = `
     query {
@@ -102,10 +105,7 @@ test('Quotes query with authors', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -122,9 +122,9 @@ test('Quotes query with authors', async () => {
                 id: 'YXV0aG9yLTE=',
                 _id: '1',
                 firstName: 'John',
-                lastName: 'Johnson'
-              }
-            }
+                lastName: 'Johnson',
+              },
+            },
           },
           {
             node: {
@@ -135,9 +135,9 @@ test('Quotes query with authors', async () => {
                 id: 'YXV0aG9yLTI=',
                 _id: '2',
                 firstName: 'Martin',
-                lastName: 'Fowler'
-              }
-            }
+                lastName: 'Fowler',
+              },
+            },
           },
           {
             node: {
@@ -148,23 +148,26 @@ test('Quotes query with authors', async () => {
                 id: 'YXV0aG9yLTM=',
                 _id: '3',
                 firstName: 'Jason',
-                lastName: 'Lengstorf'
-              }
-            }
+                lastName: 'Lengstorf',
+              },
+            },
           },
-        ]
-      }
-    }
+        ],
+      },
+    },
   });
 });
 
 test('Quotes query with filter', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
   const query = `
     query {
@@ -180,10 +183,7 @@ test('Quotes query with filter', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -196,24 +196,24 @@ test('Quotes query with filter', async () => {
               id: 'cXVvdGUtMQ==',
               _id: '1',
               text: 'First, solve the problem. Then, write the code.',
-            }
+            },
           },
           {
             node: {
               id: 'cXVvdGUtMg==',
               _id: '2',
               text: 'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-            }
+            },
           },
           {
             node: {
               id: 'cXVvdGUtNA==',
               _id: '4',
               text: 'Bad programmers worry about the code. Good programmers worry about the data structures and their relationships.',
-            }
+            },
           },
-        ]
-      }
-    }
+        ],
+      },
+    },
   });
 });

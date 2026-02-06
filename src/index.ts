@@ -11,7 +11,7 @@ async function onSignal(): Promise<void> {
   logger.warn('Server is going to shut down! Starting cleanup...');
 }
 
-async function onShutdown (): Promise<void> {
+async function onShutdown(): Promise<void> {
   logger.warn('Server is shutting down!');
 }
 
@@ -38,9 +38,9 @@ async function start(): Promise<void> {
     }
 
     server.listen(config.port, () => {
-      logger.info(`Server started at http://localhost:${ config.port }`);
+      logger.info(`Server started at http://localhost:${config.port}`);
     });
-  } catch(err) {
+  } catch (err) {
     logger.error('Unable to start server!', { error: { message: err.message, stack: err.stack } });
     process.exit(1);
   }

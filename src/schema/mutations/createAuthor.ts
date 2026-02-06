@@ -2,7 +2,7 @@ import { GraphQLNonNull } from 'graphql';
 import Context from '../../context/Context';
 import newAuthor from '../types/inputs/newAuthor';
 
-export default function(types) {
+export default function (types) {
   return {
     type: types.Author,
     args: {
@@ -11,7 +11,7 @@ export default function(types) {
       },
     },
     resolve: (_, { input }, context: Context): Promise<Author> => {
-      return context.repositories.author.create(input)
+      return context.repositories.author.create(input);
     },
   };
 }

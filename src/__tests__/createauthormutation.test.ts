@@ -13,12 +13,19 @@ afterAll(() => {
 test('createAuthor mutation', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
-  const count = await database.count({ count: '*' }).from('author').first().then(result => result.count);
+  const count = await database
+    .count({ count: '*' })
+    .from('author')
+    .first()
+    .then((result) => result.count);
 
   const query = `
     mutation {
@@ -34,10 +41,7 @@ test('createAuthor mutation', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -48,9 +52,11 @@ test('createAuthor mutation', async () => {
         _id: `${count + 1}`,
         firstName: 'Matej',
         lastName: 'Jellus',
-      }
-    }
+      },
+    },
   });
 
-  await database('author').where('id', count + 1).del();
+  await database('author')
+    .where('id', count + 1)
+    .del();
 });

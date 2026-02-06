@@ -1,4 +1,4 @@
-declare namespace  AuthorRepository {
+declare namespace AuthorRepository {
   interface CreateParameters {
     firstName: string;
     lastName: string;

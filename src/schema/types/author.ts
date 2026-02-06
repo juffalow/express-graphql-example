@@ -1,16 +1,10 @@
-import {
-  GraphQLID,
-  GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLInt,
-} from 'graphql';
+import { GraphQLID, GraphQLNonNull, GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
 import Context from '../../context/Context';
 import { formatDate } from '../../utils/functions';
 import nodesToEdges from '../queries/nodesToEdges';
 import toConnection from '../queries/toConnection';
 
-export default function(types) {
+export default function (types) {
   return new GraphQLObjectType({
     name: 'Author',
     fields: () => ({
@@ -30,14 +24,14 @@ export default function(types) {
       },
       firstName: {
         type: new GraphQLNonNull(GraphQLString),
-        description: 'Author\'s first name',
+        description: "Author's first name",
         resolve: (obj: Author): string => {
           return obj.firstName;
         },
       },
       lastName: {
         type: new GraphQLNonNull(GraphQLString),
-        description: 'Author\'s last name',
+        description: "Author's last name",
         resolve: (obj: Author): string => {
           return obj.lastName;
         },
@@ -60,7 +54,10 @@ export default function(types) {
           },
         },
         resolve: async (obj: Author, args, context: Context): Promise<Connection<Quote>> => {
-          const after = typeof args.after === 'undefined' || args.after === null ? 0 : parseInt(Buffer.from(args.after, 'base64').toString('ascii').replace('cursor', ''), 10);
+          const after =
+            typeof args.after === 'undefined' || args.after === null
+              ? 0
+              : parseInt(Buffer.from(args.after, 'base64').toString('ascii').replace('cursor', ''), 10);
           const quotes = await context.repositories.quote.find({
             first: args.first,
             after,
@@ -73,7 +70,7 @@ export default function(types) {
           });
           const edges = nodesToEdges(quotes, after);
           return toConnection(edges, quotesCount, edges.length === args.first, after > 0);
-        }
+        },
       },
       createdAt: {
         type: new GraphQLNonNull(GraphQLString),

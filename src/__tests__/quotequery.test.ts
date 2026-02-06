@@ -13,10 +13,13 @@ afterAll(() => {
 test('Quote query', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
   const query = `
     query {
@@ -29,10 +32,7 @@ test('Quote query', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -42,19 +42,22 @@ test('Quote query', async () => {
         id: 'cXVvdGUtMQ==',
         _id: '1',
         text: 'First, solve the problem. Then, write the code.',
-        createdAt: '2020-07-02 12:43:00'
-      }
-    }
+        createdAt: '2020-07-02 12:43:00',
+      },
+    },
   });
 });
 
 test('Quote query with author', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
   const query = `
     query {
@@ -72,10 +75,7 @@ test('Quote query with author', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -89,9 +89,9 @@ test('Quote query with author', async () => {
           id: 'YXV0aG9yLTE=',
           _id: '1',
           firstName: 'John',
-          lastName: 'Johnson'
-        }
-      }
-    }
+          lastName: 'Johnson',
+        },
+      },
+    },
   });
 });

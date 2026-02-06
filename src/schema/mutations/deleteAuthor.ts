@@ -2,7 +2,7 @@ import { GraphQLNonNull } from 'graphql';
 import Context from '../../context/Context';
 import deleteAuthorInput from '../types/inputs/deleteAuthor';
 
-export default function(types) {
+export default function (types) {
   return {
     type: types.Author,
     args: {

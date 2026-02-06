@@ -19,7 +19,7 @@ export default {
     if (typeof this._quoteType === 'undefined') {
       this._quoteType = quote(this);
     }
-    
+
     return this._quoteType;
   },
 
@@ -64,4 +64,4 @@ export default {
     }
     return this._deleteAuthorMutation;
   },
-}
+};

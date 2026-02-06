@@ -17,7 +17,7 @@ export default function trace(req: Request, res: Response, next: NextFunction): 
 
   namespace.run(() => {
     namespace.set('traceId', traceId);
-    res.header('x-request-id', traceId)
+    res.header('x-request-id', traceId);
 
     next();
   });

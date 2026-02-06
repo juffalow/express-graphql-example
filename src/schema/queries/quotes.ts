@@ -28,7 +28,10 @@ export default {
     },
   },
   resolve: async (_, args: QuotesQueryArguments, context: Context) => {
-    const after = typeof args.after === 'undefined' || args.after === null ? 0 : parseInt(Buffer.from(args.after, 'base64').toString('ascii').replace('cursor', ''), 10);
+    const after =
+      typeof args.after === 'undefined' || args.after === null
+        ? 0
+        : parseInt(Buffer.from(args.after, 'base64').toString('ascii').replace('cursor', ''), 10);
     const quotes = await context.repositories.quote.find({
       first: args.first,
       after,

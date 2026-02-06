@@ -18,7 +18,7 @@ const redactedFormat = format((info) => {
   }
 
   if (typeof info['email'] !== 'undefined' && typeof info['email'] === 'string') {
-    const [ name, domain ] = info.email.split('@');
+    const [name, domain] = info.email.split('@');
     info.email = `${name.substring(0, 2)}${'*'.repeat(name.length - 2)}@${'*'.repeat(domain.length - 2)}${domain.substring(domain.length - 2)}`;
   }
 
@@ -35,7 +35,7 @@ const logger = winston.createLogger({
         redactedFormat(),
         winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
         winston.format.json(),
-        winston.format.errors({ stack: true }),
+        winston.format.errors({ stack: true })
       ),
     }),
   ],

@@ -9,7 +9,7 @@ const context: Context = {
   },
   loaders: {
     author: authorLoader,
-  }
+  },
 };
 
 export default context;

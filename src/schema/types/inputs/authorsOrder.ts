@@ -1,7 +1,4 @@
-import {
-  GraphQLInputObjectType,
-  GraphQLNonNull,
-} from 'graphql';
+import { GraphQLInputObjectType, GraphQLNonNull } from 'graphql';
 import authorsOrderField from '../enums/authorsOrderField';
 import direction from '../enums/direction';
 

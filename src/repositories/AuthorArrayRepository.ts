@@ -33,7 +33,7 @@ const authorsList = [
   { id: 30, firstName: 'Jeff', lastName: 'Atwood', createdAt: '2024-09-14 13:13:29' },
   { id: 31, firstName: 'Mikko', lastName: 'Hypponen', createdAt: '2024-09-14 13:13:30' },
   { id: 32, firstName: 'Ryan', lastName: 'Singer', createdAt: '2024-09-14 13:13:31' },
-]
+];
 
 export default class AuthorKnexRepository implements AuthorRepository {
   public async get(id: number): Promise<Author> {
@@ -71,13 +71,15 @@ export default class AuthorKnexRepository implements AuthorRepository {
 
     if (Array.isArray(orderBy) && orderBy.length > 0) {
       authors.sort((a, b) => {
-        return orderBy.map((ob) => {
-          if (a[ob.field] < b[ob.field]) {
-            return ob.direction === 'asc' ? -1 : 1;
-          } else if (a[ob.field] > b[ob.field]) {
-            return ob.direction === 'asc' ? 1 : -1;
-          }
-        }).reduce((p, n) => p || n, 0);
+        return orderBy
+          .map((ob) => {
+            if (a[ob.field] < b[ob.field]) {
+              return ob.direction === 'asc' ? -1 : 1;
+            } else if (a[ob.field] > b[ob.field]) {
+              return ob.direction === 'asc' ? 1 : -1;
+            }
+          })
+          .reduce((p, n) => p || n, 0);
       });
     }
 
@@ -121,7 +123,7 @@ export default class AuthorKnexRepository implements AuthorRepository {
 
   public async update(id: number, firstName: string, lastName: string): Promise<Author> {
     logger.debug(`${this.constructor.name}.update`, { id, firstName, lastName });
-    
+
     const author = authorsList.find((author) => author.id === id);
 
     const authorIndex = authorsList.findIndex((author) => author.id === id);

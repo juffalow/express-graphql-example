@@ -13,10 +13,13 @@ afterAll(() => {
 test('deleteAuthor mutation', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
   const id = (await database.insert({ firstName: 'firstTest', lastName: 'lastTest' }).into('author'))[0];
 
@@ -33,10 +36,7 @@ test('deleteAuthor mutation', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -47,7 +47,7 @@ test('deleteAuthor mutation', async () => {
         _id: `${id}`,
         firstName: 'firstTest',
         lastName: 'lastTest',
-      }
-    }
+      },
+    },
   });
 });

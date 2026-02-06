@@ -1,6 +1,6 @@
 import { GraphQLID, GraphQLNonNull } from 'graphql';
 import Context from '../../context/Context';
-import types from '../types'
+import types from '../types';
 
 const quote = {
   type: types.Quote,

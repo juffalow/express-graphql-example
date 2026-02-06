@@ -1,8 +1,4 @@
-import {
-  GraphQLInputObjectType,
-  GraphQLNonNull,
-  GraphQLString,
-} from 'graphql';
+import { GraphQLInputObjectType, GraphQLNonNull, GraphQLString } from 'graphql';
 
 const newAuthor = new GraphQLInputObjectType({
   name: 'NewAuthor',

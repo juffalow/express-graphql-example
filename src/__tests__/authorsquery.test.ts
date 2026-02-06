@@ -13,10 +13,13 @@ afterAll(() => {
 test('Authors query', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
   const query = `
     query {
@@ -33,10 +36,7 @@ test('Authors query', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -49,38 +49,41 @@ test('Authors query', async () => {
               id: 'YXV0aG9yLTE=',
               _id: '1',
               firstName: 'John',
-              lastName: 'Johnson'
-            }
+              lastName: 'Johnson',
+            },
           },
           {
             node: {
               id: 'YXV0aG9yLTI=',
               _id: '2',
               firstName: 'Martin',
-              lastName: 'Fowler'
-            }
+              lastName: 'Fowler',
+            },
           },
           {
             node: {
               id: 'YXV0aG9yLTM=',
               _id: '3',
               firstName: 'Jason',
-              lastName: 'Lengstorf'
-            }
+              lastName: 'Lengstorf',
+            },
           },
-        ]
-      }
-    }
+        ],
+      },
+    },
   });
 });
 
 test('Authors query with order by argument', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
   const query = `
     query {
@@ -97,10 +100,7 @@ test('Authors query with order by argument', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -113,38 +113,41 @@ test('Authors query with order by argument', async () => {
               id: 'YXV0aG9yLTk=',
               _id: '9',
               firstName: 'Jamie',
-              lastName: 'Zawinski'
-            }
+              lastName: 'Zawinski',
+            },
           },
           {
             node: {
               id: 'YXV0aG9yLTg=',
               _id: '8',
               firstName: 'Niels',
-              lastName: 'Bohr'
-            }
+              lastName: 'Bohr',
+            },
           },
           {
             node: {
               id: 'YXV0aG9yLTc=',
               _id: '7',
               firstName: 'Felipe',
-              lastName: 'Fortes'
-            }
+              lastName: 'Fortes',
+            },
           },
-        ]
-      }
-    }
+        ],
+      },
+    },
   });
 });
 
 test('Authors query with filter by first name and last name', async () => {
   const app = express();
 
-  app.use('/graphql', createHandler({
-    context: context as unknown as OperationContext,
-    schema,
-  }));
+  app.use(
+    '/graphql',
+    createHandler({
+      context: context as unknown as OperationContext,
+      schema,
+    })
+  );
 
   const query = `
     query {
@@ -161,10 +164,7 @@ test('Authors query with filter by first name and last name', async () => {
     }
   `;
 
-  const response = await request(app)
-    .post('/graphql')
-    .type('json')
-    .send(JSON.stringify({ query }));
+  const response = await request(app).post('/graphql').type('json').send(JSON.stringify({ query }));
 
   expect(response.statusCode).toEqual(200);
 
@@ -177,11 +177,11 @@ test('Authors query with filter by first name and last name', async () => {
               id: 'YXV0aG9yLTE=',
               _id: '1',
               firstName: 'John',
-              lastName: 'Johnson'
-            }
+              lastName: 'Johnson',
+            },
           },
-        ]
-      }
-    }
+        ],
+      },
+    },
   });
 });

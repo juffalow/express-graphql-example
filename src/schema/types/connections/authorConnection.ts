@@ -1,12 +1,7 @@
-import {
-  GraphQLInt,
-  GraphQLList,
-  GraphQLNonNull,
-  GraphQLObjectType,
-} from 'graphql';
+import { GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType } from 'graphql';
 import pageInfo from '../pageInfo';
 
-export default function(types) {
+export default function (types) {
   return new GraphQLObjectType({
     name: 'AuthorConnection',
     fields: () => ({

@@ -5,18 +5,13 @@ export default class AuthorKnexRepository implements AuthorRepository {
   public async get(id: number): Promise<Author> {
     logger.debug(`${this.constructor.name}.get`, { id });
 
-    return database.select()
-      .from('author')
-      .where('id', id)
-      .first();
+    return database.select().from('author').where('id', id).first();
   }
 
   public async getMany(ids: number[]): Promise<Author[]> {
     logger.debug(`${this.constructor.name}.getMany`, { ids });
 
-    return database.select()
-      .from('author')
-      .whereIn('id', ids);
+    return database.select().from('author').whereIn('id', ids);
   }
 
   public async find(params: AuthorRepository.FindParameters): Promise<Author[]> {
@@ -24,7 +19,8 @@ export default class AuthorKnexRepository implements AuthorRepository {
 
     const { first, after, firstName, lastName, orderBy } = params;
 
-    return database.select()
+    return database
+      .select()
       .from('author')
       .modify((queryBuilder) => {
         if (typeof after !== 'undefined' && after !== null) {
@@ -40,7 +36,7 @@ export default class AuthorKnexRepository implements AuthorRepository {
         }
 
         if (Array.isArray(orderBy)) {
-          orderBy.forEach(ob => queryBuilder.orderBy(ob.field, ob.direction));
+          orderBy.forEach((ob) => queryBuilder.orderBy(ob.field, ob.direction));
         }
       })
       .limit(first);
@@ -51,7 +47,8 @@ export default class AuthorKnexRepository implements AuthorRepository {
 
     const { firstName, lastName } = params;
 
-    return database.count({ count: '*' })
+    return database
+      .count({ count: '*' })
       .from('author')
       .modify((queryBuilder) => {
         if (typeof firstName !== 'undefined' && firstName !== null) {
@@ -63,26 +60,28 @@ export default class AuthorKnexRepository implements AuthorRepository {
         }
       })
       .first()
-      .then(result => result.count);
+      .then((result) => result.count);
   }
 
   public async create(params: AuthorRepository.CreateParameters): Promise<Author> {
     logger.debug(`${this.constructor.name}.create`, { params });
 
-    return database.insert({
-      firstName: params.firstName,
-      lastName: params.lastName,
-    })
-    .into('author')
-    .then(ids => {
-      return this.get(ids[0]);
-    });
+    return database
+      .insert({
+        firstName: params.firstName,
+        lastName: params.lastName,
+      })
+      .into('author')
+      .then((ids) => {
+        return this.get(ids[0]);
+      });
   }
 
   public async update(id: number, firstName: string, lastName: string): Promise<Author> {
     logger.debug(`${this.constructor.name}.update`, { id, firstName, lastName });
 
-    return database.table('author')
+    return database
+      .table('author')
       .where('id', id)
       .modify((queryBuilder) => {
         if (typeof firstName !== 'undefined' && firstName !== null) {
@@ -93,12 +92,13 @@ export default class AuthorKnexRepository implements AuthorRepository {
           queryBuilder.update('lastName', lastName);
         }
       })
-      .then(updatedRows => {
+      .then((updatedRows) => {
         if (updatedRows.length === 0) {
           throw new Error('Author not found!');
         }
         return updatedRows;
-      }).then(() => {
+      })
+      .then(() => {
         return this.get(id);
       });
   }
