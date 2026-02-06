@@ -59,7 +59,7 @@ export default function(types) {
             type: GraphQLString,
           },
         },
-        resolve: async (obj: Author, args, context: Context): Promise<any> => {
+        resolve: async (obj: Author, args, context: Context): Promise<Connection<Quote>> => {
           const after = typeof args.after === 'undefined' || args.after === null ? 0 : parseInt(Buffer.from(args.after, 'base64').toString('ascii').replace('cursor', ''), 10);
           const quotes = await context.repositories.quote.find({
             first: args.first,

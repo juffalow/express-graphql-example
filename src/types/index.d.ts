@@ -16,3 +16,21 @@ type OrderBy = {
   field: string;
   direction: string;
 }
+
+type Edge<T> = {
+  node: T;
+  cursor: string;
+}
+
+type PageInfo = {
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  startCursor: string;
+  endCursor: string;
+}
+
+type Connection<T> = {
+  edges: Edge<T>[];
+  pageInfo: PageInfo;
+  totalCount: number;
+}

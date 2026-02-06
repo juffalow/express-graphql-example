@@ -9,7 +9,7 @@ const author = {
       type: new GraphQLNonNull(GraphQLID),
     },
   },
-  resolve: (_, { id }, context: Context): Promise<any> => {
+  resolve: (_, { id }, context: Context): Promise<Author> => {
     return context.repositories.author.get(parseInt(id));
   },
 };

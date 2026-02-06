@@ -10,7 +10,7 @@ export default function(types) {
         type: new GraphQLNonNull(deleteAuthorInput),
       },
     },
-    resolve: (_, { input }, context: Context): Promise<any> => {
+    resolve: (_, { input }, context: Context): Promise<Author> => {
       return context.repositories.author.delete(input.id);
     },
   };

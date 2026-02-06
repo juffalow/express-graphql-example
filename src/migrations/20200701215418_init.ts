@@ -9,7 +9,7 @@ import { Knex } from 'knex';
  * @see https://knexjs.org/#Migrations-CLI
  * @param knex
  */
-export async function up(knex: Knex): Promise<any> {
+export async function up(knex: Knex): Promise<unknown> {
   return knex.schema.createTable('author', (author) => {
     author.increments('id').primary();
     author.string('firstName', 255).notNullable();
@@ -27,7 +27,7 @@ export async function up(knex: Knex): Promise<any> {
 }
 
 
-export async function down(knex: Knex): Promise<any> {
+export async function down(knex: Knex): Promise<unknown> {
   return knex.schema.dropTable('quote').dropTable('author');
 }
 

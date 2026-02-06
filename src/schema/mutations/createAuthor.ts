@@ -10,7 +10,7 @@ export default function(types) {
         type: new GraphQLNonNull(newAuthor),
       },
     },
-    resolve: (_, { input }, context: Context): Promise<any> => {
+    resolve: (_, { input }, context: Context): Promise<Author> => {
       return context.repositories.author.create(input)
     },
   };

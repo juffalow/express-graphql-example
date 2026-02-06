@@ -6,6 +6,7 @@ import quotes from './queries/quotes';
 
 const query = new GraphQLObjectType({
   name: 'Query',
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   fields: (): any => ({
     author,
     authors,

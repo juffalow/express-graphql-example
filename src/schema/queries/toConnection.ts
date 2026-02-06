@@ -1,4 +1,4 @@
-export default (edges: any[], totalCount: number, hasNextPage: boolean, hasPreviousPage: boolean) => {
+export default <T>(edges: Edge<T>[], totalCount: number, hasNextPage: boolean, hasPreviousPage: boolean): Connection<T> => {
   return {
     edges,
     pageInfo: {

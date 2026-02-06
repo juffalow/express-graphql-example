@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
 
-export async function seed(knex: Knex): Promise<any> {
+export async function seed(knex: Knex): Promise<unknown> {
   return knex("author").del()
     .then(() => {
       return knex("author").insert([
